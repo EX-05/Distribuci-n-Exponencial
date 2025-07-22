@@ -1,0 +1,125 @@
+/* Estilo general */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    overflow: hidden;
+}
+
+/* Fondo de partículas */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Animación de tiempo */
+.time-animation {
+    width: 400px;
+    height: 200px;
+    background: linear-gradient(90deg, #00f2ff, #ff00ff);
+    border-radius: 15px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); box-shadow: 0 0 20px #00f2ff; }
+    100% { transform: scale(1); }
+}
+
+/* Títulos */
+.reveal h1, .reveal h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: #00f2ff;
+    text-shadow: 0 0 20px rgba(0, 242, 255, 0.9), 0 0 10px rgba(0, 242, 255, 0.6);
+}
+
+/* Texto */
+.reveal p, .reveal li {
+    color: #e0e0e0;
+    font-size: 1.2em;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+/* Fórmulas KaTeX */
+.katex {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.3em;
+    color: #00ff9f;
+    text-shadow: 0 0 10px rgba(0, 255, 159, 0.7);
+}
+
+/* Animación de fórmulas */
+.katex-animate {
+    opacity: 0;
+    animation: writeFormula 1.2s forwards;
+}
+
+@keyframes writeFormula {
+    0% { opacity: 0; transform: translateY(30px) scale(0.8); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Gráficos */
+.reveal canvas {
+    border: 3px solid #00f2ff;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0, 242, 255, 0.7), inset 0 0 10px rgba(0, 242, 255, 0.3);
+}
+
+/* Botones y sliders */
+.reveal button, .reveal input[type="range"] {
+    background: linear-gradient(45deg, #00f2ff, #ff00ff);
+    color: #1a1a2e;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+}
+
+.reveal button:hover, .reveal input[type="range"]:hover {
+    background: linear-gradient(45deg, #ff00ff, #00ff9f);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+}
+
+/* Imágenes */
+.reveal img {
+    border-radius: 15px;
+    max-width: 100%;
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.6), inset 0 0 10px rgba(255, 0, 255, 0.3);
+    animation: float 3s infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+/* Explicación del slider */
+#lambdaExplanation {
+    font-size: 1em;
+    color: #00ff9f;
+    margin-top: 15px;
+    animation: fadeInGlow 0.6s;
+    text-shadow: 0 0 10px rgba(0, 255, 159, 0.8);
+}
+
+@keyframes fadeInGlow {
+    0% { opacity: 0; text-shadow: 0 0 0px rgba(0, 255, 159, 0); }
+    100% { opacity: 1; text-shadow: 0 0 10px rgba(0, 255, 159, 0.8); }
+}
+
+/* Simulación 3D */
+#mm1Sim {
+    width: 400px;
+    height: 200px;
+    border: 3px solid #ff00ff;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(255, 0, 255, 0.7);
+}

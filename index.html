@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distribución Exponencial: Épica Universitaria</title>
+    <!-- Reveal.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/theme/black.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400&family=Fira+Code&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- Confeti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- KaTeX -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+</head>
+<body>
+    <!-- Fondo de partículas -->
+    <div id="particles-js"></div>
+
+    <div class="reveal">
+        <div class="slides">
+            <!-- Diapositiva 1: Portada -->
+            <section>
+                <h1 class="animate__animated animate__zoomIn">Distribución Exponencial</h1>
+                <p class="animate__animated animate__fadeInUp">La Revolución de la Probabilidad</p>
+                <p class="animate__animated animate__fadeInUp" style="animation-delay: 0.5s;">Por [Nombres del Equipo]</p>
+                <i class="fas fa-rocket animate__animated animate__pulse" style="font-size: 2.5em;"></i>
+            </section>
+
+            <!-- Diapositiva 2: Definición -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">¿Qué es esto?</h2>
+                <p class="fragment fade-in">Tiempo entre eventos aleatorios en un proceso de Poisson.</p>
+                <p class="fragment fade-in">Ejemplo: Espera por tacos en una taquería. 🌮</p>
+            </section>
+
+            <!-- Diapositiva 3: Simulación Poisson -->
+            <section>
+                <h2>Eventos en Acción</h2>
+                <canvas id="poissonSim" width="400" height="200"></canvas>
+                <p class="fragment fade-in">¡Partículas que simulan llegadas aleatorias!</p>
+            </section>
+
+            <!-- Diapositiva 4: Fórmula PDF -->
+            <section>
+                <h2>Fórmula de Densidad (PDF)</h2>
+                <p class="fragment katex-animate" data-katex="f(x) = \lambda e^{-\lambda x}, \quad x \geq 0"></p>
+                <p class="fragment fade-in">λ = tasa de eventos por unidad de tiempo.</p>
+            </section>
+
+            <!-- Diapositiva 5: Gráfico PDF -->
+            <section>
+                <h2>Visualizando la PDF</h2>
+                <canvas id="expChart1" width="400" height="200"></canvas>
+                <p class="fragment fade-in">λ = 1: ¡Decae como un relámpago!</p>
+            </section>
+
+            <!-- Diapositiva 6: Fórmula CDF -->
+            <section>
+                <h2>Fórmula de Distribución Acumulada (CDF)</h2>
+                <p class="fragment katex-animate" data-katex="F(x) = 1 - e^{-\lambda x}, \quad x \geq 0"></p>
+                <p class="fragment fade-in">Probabilidad de tiempo menor a x.</p>
+            </section>
+
+            <!-- Diapositiva 7: Derivación de la Media -->
+            <section>
+                <h2>Derivando la Media</h2>
+                <p class="fragment katex-animate" data-katex="E[X] = \int_0^\infty x \lambda e^{-\lambda x} \, dx = \frac{1}{\lambda}"></p>
+                <p class="fragment fade-in">Tiempo esperado entre eventos.</p>
+            </section>
+
+            <!-- Diapositiva 8: Propiedad Sin Memoria -->
+            <section>
+                <h2>Propiedad Sin Memoria</h2>
+                <p class="fragment fade-in">El pasado no importa: espera futura es independiente.</p>
+                <p class="fragment katex-animate" data-katex="P(X > s + t | X > s) = P(X > t)"></p>
+                <img src="https://media.giphy.com/media/l0Iyl55kTeh71nTWw/giphy.gif" alt="Memoria" style="width: 200px;">
+            </section>
+
+            <!-- Diapositiva 9: Media y Varianza -->
+            <section>
+                <h2>Media y Varianza</h2>
+                <p class="fragment katex-animate" data-katex="\text{Media} = \frac{1}{\lambda}"></p>
+                <p class="fragment katex-animate" data-katex="\text{Varianza} = \frac{1}{\lambda^2}"></p>
+                <p class="fragment fade-in">Si λ = 2, media = 0.5 min.</p>
+            </section>
+
+            <!-- Diapositiva 10: Gráfico Comparativo -->
+            <section>
+                <h2>Explorando λ</h2>
+                <canvas id="expChart2" width="400" height="200"></canvas>
+                <p class="fragment fade-in">λ = 0.5 vs λ = 2: ¡Contrastes épicos!</p>
+            </section>
+
+            <!-- Diapositiva 11: Aplicaciones -->
+            <section>
+                <h2>Aplicaciones Reales</h2>
+                <ul>
+                    <li class="fragment fade-in">Colas en taquerías</li>
+                    <li class="fragment fade-in">Respuestas en WhatsApp</li>
+                    <li class="fragment fade-in">Llamadas en call centers</li>
+                </ul>
+                <img src="https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif" alt="Tacos" style="width: 200px;">
+            </section>
+
+            <!-- Diapositiva 12: Ejemplo 1 -->
+            <section>
+                <h2>Ejemplo: Taquería</h2>
+                <p class="fragment fade-in">λ = 2 clientes/minuto.</p>
+                <p class="fragment katex-animate" data-katex="P(X < 1) = 1 - e^{-2 \cdot 1} \approx 0.865"></p>
+            </section>
+
+            <!-- Diapositiva 13: Ejemplo 2 -->
+            <section>
+                <h2>Ejemplo: WhatsApp</h2>
+                <p class="fragment fade-in">λ = 0.1 respuestas/10 min.</p>
+                <p class="fragment katex-animate" data-katex="\text{Media} = \frac{1}{0.1} = 10 \text{ min}"></p>
+            </section>
+
+            <!-- Diapositiva 14: Ejemplo 3 -->
+            <section>
+                <h2>Ejemplo: Call Center</h2>
+                <p class="fragment fade-in">λ = 0.2 llamadas/5 min.</p>
+                <p class="fragment katex-animate" data-katex="P(X > 3) = e^{-0.2 \cdot 3} \approx 0.549"></p>
+            </section>
+
+            <!-- Diapositiva 15: Relación con Poisson -->
+            <section>
+                <h2>Exponencial y Poisson</h2>
+                <p class="fragment fade-in">Poisson cuenta, exponencial mide.</p>
+                <p class="fragment katex-animate" data-katex="\text{Poisson}(\lambda t) \leftrightarrow \text{Exponencial}(\lambda)"></p>
+            </section>
+
+            <!-- Diapositiva 16: Propiedades Clave -->
+            <section>
+                <h2>Propiedades Clave</h2>
+                <ul>
+                    <li class="fragment fade-in">Siempre positiva: f(x) ≥ 0</li>
+                    <li class="fragment fade-in">Decae exponencialmente</li>
+                    <li class="fragment fade-in">Sin memoria: P(X > s + t | X > s) = P(X > t)</li>
+                </ul>
+            </section>
+
+            <!-- Diapositiva 17: Gráfico Avanzado -->
+            <section>
+                <h2>Más sobre λ</h2>
+                <canvas id="expChart3" width="400" height="200"></canvas>
+                <p class="fragment fade-in">λ = 1.5: ¡Poder intermedio!</p>
+            </section>
+
+            <!-- Diapositiva 18: Interactividad -->
+            <section>
+                <h2>¡Domina λ!</h2>
+                <input type="range" min="0.1" max="2" step="0.1" value="1" id="lambdaSlider" onchange="updateChart()">
+                <canvas id="dynamicChart" width="400" height="200"></canvas>
+                <p id="lambdaExplanation" class="fragment fade-in">Mueve λ y descubre su magia.</p>
+            </section>
+
+            <!-- Diapositiva 19: Mini-Juego -->
+            <section>
+                <h2>¡Adivina λ!</h2>
+                <p class="fragment fade-in">¿Cuál es λ en este gráfico?</p>
+                <canvas id="gameChart" width="400" height="200"></canvas>
+                <p class="fragment fade-in">Opciones: 0.5, 1, 1.5, 2</p>
+                <button onclick="showAnswer()">¡Revela!</button>
+                <p class="answer" style="display: none;">¡λ = 1.5! 🎉</p>
+            </section>
+
+            <!-- Diapositiva 20: Momentos -->
+            <section>
+                <h2>Momentos Épicos</h2>
+                <p class="fragment katex-animate" data-katex="E[X^n] = \frac{n!}{\lambda^n}"></p>
+                <p class="fragment fade-in">Primer momento = Media, segundo = Varianza.</p>
+            </section>
+
+            <!-- Diapositiva 21: Función Generadora -->
+            <section>
+                <h2>Función Generadora</h2>
+                <p class="fragment katex-animate" data-katex="M(t) = \frac{\lambda}{\lambda - t}, \quad t < \lambda"></p>
+                <p class="fragment fade-in">Clave para momentos superiores.</p>
+            </section>
+
+            <!-- Diapositiva 22: Simulación M/M/1 -->
+            <section>
+                <h2>Colas M/M/1 en 3D</h2>
+                <div id="mm1Sim"></div>
+                <p class="fragment fade-in">¡Visualiza colas en tiempo real!</p>
+            </section>
+
+            <!-- Diapositiva 23: Aplicaciones Avanzadas -->
+            <section>
+                <h2>Aplicaciones del Futuro</h2>
+                <ul>
+                    <li class="fragment fade-in">Modelos de colas (M/M/1)</li>
+                    <li class="fragment fade-in">Fiabilidad en ingeniería</li>
+                    <li class="fragment fade-in">Finanzas estocásticas</li>
+                </ul>
+            </section>
+
+            <!-- Diapositiva 24: Resumen -->
+            <section>
+                <h2>Resumen Final</h2>
+                <ul>
+                    <li class="fragment fade-in">Tiempos entre eventos</li>
+                    <li class="fragment katex-animate" data-katex="f(x) = \lambda e^{-\lambda x}, \quad F(x) = 1 - e^{-\lambda x}"></li>
+                    <li class="fragment fade-in">Sin memoria, media = 1/λ, varianza = 1/λ²</li>
+                </ul>
+            </section>
+
+            <!-- Diapositiva 25: Easter Egg -->
+            <section data-state="easter-egg">
+                <h2>¡Secreto Cósmico!</h2>
+                <p class="animate__animated animate__shakeX">¡Matemáticas con humor!</p>
+                <img src="https://media.giphy.com/media/26tPplGWjN0xLybiU/giphy.gif" alt="Meme" style="width: 300px;">
+                <audio id="easterSound" src="https://www.soundjay.com/buttons/beep-01a.mp3"></audio>
+            </section>
+
+            <!-- Diapositiva 26: Cierre -->
+            <section>
+                <h2>¡Legado Matemático!</h2>
+                <p class="animate__animated animate__bounce">Gracias por esta odisea</p>
+                <button onclick="launchConfetti()" class="animate__animated animate__pulse">¡Explosión de Gloria!</button>
+                <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Éxito" style="width: 200px;">
+            </section>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reveal.min.js"></script>
+    <script src="mm1-simulation.js"></script>
+    <script src="poisson-simulation.js"></script>
+    <script src="audio-effects.js"></script>
+    <script src="animations.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
