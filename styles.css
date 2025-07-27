@@ -3,6 +3,7 @@ body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #1a1a2e, #0f3460);
     overflow: hidden;
+    font-size: 1.1em; /* Increased base font size for 90% zoom */
 }
 
 /* Fondo de partículas */
@@ -15,8 +16,8 @@ body {
 
 /* Animación de tiempo */
 .time-animation {
-    width: 250px;
-    height: 125px;
+    width: 20vw; /* Relative units */
+    height: 10vw;
     background: linear-gradient(90deg, #00f2ff, #ff00ff);
     border-radius: 8px;
     animation: pulse 1.5s infinite;
@@ -33,20 +34,20 @@ body {
     font-family: 'Orbitron', sans-serif;
     color: #00f2ff;
     text-shadow: 0 0 10px rgba(0, 242, 255, 0.5), 0 0 3px rgba(0, 242, 255, 0.3);
-    font-size: 1.3em;
+    font-size: 1.5em; /* Increased for zoom */
 }
 
 /* Texto */
 .reveal p, .reveal li {
     color: #e0e0e0;
-    font-size: 0.9em;
+    font-size: 1em; /* Increased for zoom */
     text-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
 /* Fórmulas KaTeX */
 .katex {
     font-family: 'Fira Code', monospace;
-    font-size: 1em;
+    font-size: 1.1em; /* Increased for zoom */
     color: #00ff9f;
     text-shadow: 0 0 3px rgba(0, 255, 159, 0.4);
 }
@@ -67,7 +68,7 @@ body {
     border: 1px solid #00f2ff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 242, 255, 0.3), inset 0 0 3px rgba(0, 242, 255, 0.1);
-    max-width: 100%;
+    max-width: 90%; /* Responsive width */
     height: auto;
 }
 
@@ -75,26 +76,21 @@ body {
 .reveal button, .reveal input[type="range"] {
     background: linear-gradient(45deg, #00f2ff, #ff00ff);
     color: #1a1a2e;
-    padding: 6px 12px;
+    padding: 8px 14px; /* Slightly larger */
     border: none;
     border-radius: 6px;
     cursor: pointer;
     font-family: 'Orbitron', sans-serif;
     transition: all 0.2s ease;
     box-shadow: 0 0 5px rgba(0, 242, 255, 0.2);
-    font-size: 0.8em;
-}
-
-.reveal button:hover, .reveal input[type="range"]:hover {
-    background: linear-gradient(45deg, #ff00ff, #00ff9f);
-    transform: scale(1.02);
-    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+    font-size: 0.9em; /* Increased for zoom */
 }
 
 /* Imágenes */
 .reveal img {
     border-radius: 8px;
-    max-width: 200px;
+    max-width: 20vw; /* Relative units */
+    max-height: 20vh;
     box-shadow: 0 0 10px rgba(255, 0, 255, 0.3), inset 0 0 3px rgba(255, 0, 255, 0.1);
     animation: float 1.5s infinite;
 }
@@ -107,7 +103,7 @@ body {
 
 /* Explicación del slider */
 #lambdaExplanation {
-    font-size: 0.8em;
+    font-size: 0.9em; /* Increased for zoom */
     color: #00ff9f;
     margin-top: 8px;
     animation: fadeInGlow 0.4s;
@@ -121,9 +117,26 @@ body {
 
 /* Simulación 3D */
 #mm1Sim {
-    width: 250px;
-    height: 125px;
+    width: 20vw; /* Relative units */
+    height: 10vw;
     border: 1px solid #ff00ff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+}
+
+/* Media query for smaller screens or zoomed views */
+@media screen and (max-width: 768px) {
+    .reveal h1, .reveal h2 {
+        font-size: 1.3em;
+    }
+    .reveal p, .reveal li {
+        font-size: 0.9em;
+    }
+    .reveal canvas, #mm1Sim {
+        max-width: 100%;
+    }
+    .reveal img {
+        max-width: 30vw;
+        max-height: 15vh;
+    }
 }

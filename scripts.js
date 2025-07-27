@@ -44,7 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
         options: {
             responsive: true,
             animation: { duration: 2000, easing: 'easeOutBounce' },
-            scales: { x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0' } }, y: { title: { display: true, text: 'f(x)', color: '#e0e0e0' } } }
+            scales: {
+                x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0', font: { size: 16 } } },
+                y: { title: { display: true, text: 'f(x)', color: '#e0e0e0', font: { size: 16 } } }
+            },
+            plugins: {
+                legend: { labels: { font: { size: 14 } } }
+            }
         }
     });
 
@@ -78,7 +84,13 @@ document.addEventListener('DOMContentLoaded', () => {
         options: {
             responsive: true,
             animation: { duration: 2000, easing: 'easeOutBounce' },
-            scales: { x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0' } }, y: { title: { display: true, text: 'f(x)', color: '#e0e0e0' } } }
+            scales: {
+                x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0', font: { size: 16 } } },
+                y: { title: { display: true, text: 'f(x)', color: '#e0e0e0', font: { size: 16 } } }
+            },
+            plugins: {
+                legend: { labels: { font: { size: 14 } } }
+            }
         }
     });
 
@@ -101,7 +113,13 @@ document.addEventListener('DOMContentLoaded', () => {
         options: {
             responsive: true,
             animation: { duration: 2000, easing: 'easeOutBounce' },
-            scales: { x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0' } }, y: { title: { display: true, text: 'f(x)', color: '#e0e0e0' } } }
+            scales: {
+                x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0', font: { size: 16 } } },
+                y: { title: { display: true, text: 'f(x)', color: '#e0e0e0', font: { size: 16 } } }
+            },
+            plugins: {
+                legend: { labels: { font: { size: 14 } } }
+            }
         }
     });
 
@@ -135,7 +153,13 @@ document.addEventListener('DOMContentLoaded', () => {
         options: {
             responsive: true,
             animation: { duration: 2000, easing: 'easeOutBounce' },
-            scales: { x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0' } }, y: { title: { display: true, text: 'f(x)', color: '#e0e0e0' } } }
+            scales: {
+                x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0', font: { size: 16 } } },
+                y: { title: { display: true, text: 'f(x)', color: '#e0e0e0', font: { size: 16 } } }
+            },
+            plugins: {
+                legend: { labels: { font: { size: 14 } } }
+            }
         }
     });
     window.updateChart = updateChart;
@@ -159,7 +183,13 @@ document.addEventListener('DOMContentLoaded', () => {
         options: {
             responsive: true,
             animation: { duration: 2000, easing: 'easeOutBounce' },
-            scales: { x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0' } }, y: { title: { display: true, text: 'f(x)', color: '#e0e0e0' } } }
+            scales: {
+                x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0', font: { size: 16 } } },
+                y: { title: { display: true, text: 'f(x)', color: '#e0e0e0', font: { size: 16 } } }
+            },
+            plugins: {
+                legend: { labels: { font: { size: 14 } } }
+            }
         }
     });
 

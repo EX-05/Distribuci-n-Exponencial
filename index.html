@@ -2,331 +2,417 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=1.0, user-scalable=no">
-    <title>Distribución Exponencial: Épica</title>
-    <!-- Reveal.js -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reveal.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/theme/black.min.css">
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400&family=Fira+Code&family=Roboto+Mono&display=swap" rel="stylesheet">
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- KaTeX -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-    <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distribución Exponencial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/sky.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body { background: linear-gradient(135deg, #0a0e2e, #1a4060); overflow: hidden; }
+        .reveal h1 { color: #00f2ff; text-shadow: 0 0 10px #00f2ff; }
+        .reveal h2 { color: #ff00ff; text-shadow: 0 0 5px #ff00ff; }
+        .reveal p, .reveal ul, .reveal table { color: #e0e0e0; text-shadow: 0 0 2px #00ff9f; }
+        .interactive { cursor: pointer; transition: all 0.3s; }
+        .interactive:hover { transform: scale(1.05); box-shadow: 0 0 15px #00f2ff; }
+        canvas { border: 1px solid #00ff9f; border-radius: 5px; }
+        table { border-collapse: collapse; margin: 10px 0; width: 80%; }
+        th, td { border: 1px solid #00ff9f; padding: 5px; text-align: center; }
+        .animate-pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+    </style>
 </head>
 <body>
-    <div id="particles-js"></div>
-
     <div class="reveal">
         <div class="slides">
-            <!-- Diapositiva 1: Bienvenida -->
-            <section>
-                <h1 class="animate__animated animate__zoomIn">Bienvenida a la Distribución Exponencial</h1>
+            <!-- Diapositiva 1 -->
+            <section data-transition="zoom" data-background="#0a0e2e">
+                <h1>Bienvenida a la Distribución Exponencial</h1>
                 <h2>Avance #1: Descifrando la Distribución Exponencial</h2>
                 <p>Grupo #6: Retana Elian Alessandro Rodríguez, Coto Eduardo Alberto Astacio, Rivera Daniel Cruz, Madrigal Jorge Eduardo Calderón</p>
                 <p>Curso: Probabilidad y Estadística Descriptiva, Lunes 2-5 pm</p>
                 <p>Docente: Herny Francisco Barrantes Alfaro</p>
-                <p class="fragment fade-in">“¿Cuánto tiempo esperas al próximo cliente o fallo? ¡Hoy lo descubriremos!”</p>
-                <canvas id="expChart1" width="250" height="125"></canvas> <!-- Fondo con curva exponencial animada y puntos -->
+                <p class="animate__animated animate__pulse animate-pulse">¿Cuánto tiempo esperas al próximo cliente o fallo? ¡Hoy lo descubriremos!</p>
+                <canvas id="expCurve1" style="width: 50vw; height: 25vh;" class="animate__animated animate__fadeIn"></canvas>
+                <button onclick="animateEvents()" class="interactive">¡Explorar!</button>
             </section>
 
-            <!-- Diapositiva 2: ¿Qué Nos Motiva? -->
-            <section>
-                <h2 class="animate__animated animate__bounceIn">¿Qué Nos Motiva? (Presentador 1)</h2>
-                <p class="fragment fade-in">La distribución exponencial modela el tiempo entre eventos aleatorios e independientes.</p>
+            <!-- Diapositiva 2 -->
+            <section data-background="#1a4060">
+                <h2>¿Qué Nos Motiva? (Presentador 1)</h2>
+                <p>La distribución exponencial modela el tiempo entre eventos aleatorios e independientes.</p>
                 <ul>
-                    <li class="fragment fade-in">Importancia: Predice comportamientos en industria, proyectos y tecnología.</li>
-                    <li class="fragment fade-in">Ejemplo introductorio: Tiempo hasta que un semáforo cambie o un servidor falle.</li>
+                    <li><strong>Importancia:</strong> Predice comportamientos en industria, proyectos y tecnología.</li>
+                    <li><strong>Ejemplo introductorio:</strong> Tiempo hasta que un semáforo cambie o un servidor falle.</li>
                 </ul>
-                <p class="fragment fade-in">Dato extra: Usada en más del 60% de los modelos de fiabilidad industrial (Ross, 2019).</p>
-                <img src="assets/semaforo.jpg" alt="Semáforo o servidor con cronómetro" style="width: 200px;">
+                <p><strong>Dato extra:</strong> Usada en más del 60% de los modelos de fiabilidad industrial (Ross, 2019).</p>
+                <img src="assets/semaphore_server.jpg" style="width: 40vw;" class="animate__animated animate__zoomIn">
             </section>
 
-            <!-- Diapositiva 3: Estructura de la Presentación -->
+            <!-- Diapositiva 3 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Estructura de la Presentación (Presentador 1)</h2>
+                <h2>Estructura de la Presentación (Presentador 1)</h2>
                 <ul>
-                    <li class="fragment fade-in">Objetivos: ¿Qué aprenderemos?</li>
-                    <li class="fragment fade-in">Metodología: ¿Cómo lo estudiamos?</li>
-                    <li class="fragment fade-in">Teoría: ¿Qué es la distribución exponencial?</li>
-                    <li class="fragment fade-in">Aplicaciones: ¿Dónde impacta?</li>
-                    <li class="fragment fade-in">Visualización: Datos y gráficos en Excel.</li>
+                    <li><strong>Objetivos:</strong> ¿Qué aprenderemos?</li>
+                    <li><strong>Metodología:</strong> ¿Cómo lo estudiamos?</li>
+                    <li><strong>Teoría:</strong> ¿Qué es la distribución exponencial?</li>
+                    <li><strong>Aplicaciones:</strong> ¿Dónde impacta?</li>
+                    <li><strong>Visualización:</strong> Datos y gráficos en Excel.</li>
                 </ul>
-                <p class="fragment fade-in">Nota: Enfatizar que cada sección conecta teoría con práctica.</p>
-                <img src="assets/diagrama_circular.png" alt="Diagrama circular animado" style="width: 200px;">
+                <p>Nota: Cada sección conecta teoría con práctica.</p>
+                <canvas id="pieChart" style="width: 50vw; height: 25vh;" class="animate__animated animate__fadeIn"></canvas>
+                <input type="range" id="sectionSlider" min="1" max="5" value="1" onchange="updatePieChart()" class="interactive">
             </section>
 
-            <!-- Diapositiva 4: Objetivo General -->
+            <!-- Diapositiva 4 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Objetivo General (Presentador 1)</h2>
-                <p class="fragment fade-in">Explorar las propiedades y usos prácticos de la distribución exponencial en probabilidad y estadística descriptiva.</p>
+                <h2>Objetivo General (Presentador 1)</h2>
+                <p>Explorar las propiedades y usos prácticos de la distribución exponencial en probabilidad y estadística descriptiva.</p>
                 <ul>
-                    <li class="fragment fade-in">Enfoque: Modelar tiempos entre eventos aleatorios (ej., llegadas de clientes, fallos de máquinas).</li>
-                    <li class="fragment fade-in">Relevancia: Optimiza planificación y reduce riesgos en múltiples industrias.</li>
+                    <li><strong>Enfoque:</strong> Modelar tiempos entre eventos aleatorios (ej., llegadas de clientes, fallos de máquinas).</li>
+                    <li><strong>Relevancia:</strong> Optimiza planificación y reduce riesgos en múltiples industrias.</li>
                 </ul>
-                <img src="assets/reloj_curva.png" alt="Icono de un reloj con curva exponencial decreciente" style="width: 200px;">
+                <img src="assets/clock_curve.jpg" style="width: 40vw;" class="animate__animated animate__slideInUp">
             </section>
 
-            <!-- Diapositiva 5: Objetivos Específicos - Teoría -->
+            <!-- Diapositiva 5 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Objetivos Específicos - Teoría (Presentador 1)</h2>
+                <h2>Objetivos Específicos - Teoría (Presentador 1)</h2>
                 <ul>
-                    <li class="fragment fade-in">Describir propiedades clave: sin memoria, tasa de riesgo constante.</li>
-                    <li class="fragment fade-in">Explicar cómo modela eventos aleatorios (ej., tiempo entre averías de un motor).</li>
-                    <li class="fragment fade-in">Ejemplo: Si un cajero atiende cada 5 minutos, ¿cuál es la probabilidad de esperar más de 10 minutos?</li>
+                    <li>Describir propiedades clave: sin memoria, tasa de riesgo constante.</li>
+                    <li>Explicar cómo modela eventos aleatorios (ej., tiempo entre averías de un motor).</li>
+                    <li><strong>Ejemplo:</strong> Si un cajero atiende cada 5 minutos, ¿cuál es la probabilidad de esperar más de 10 minutos?</li>
                 </ul>
-                <img src="assets/fila_clientes.jpg" alt="Esquema de un evento aleatorio (clientes en una fila)" style="width: 200px;">
+                <canvas id="queueChart" style="width: 50vw; height: 25vh;" class="animate__animated animate__fadeIn"></canvas>
+                <button onclick="calculateProbability()" class="interactive">Calcular Probabilidad</button>
             </section>
 
-            <!-- Diapositiva 6: Objetivos Específicos - Práctica -->
+            <!-- Diapositiva 6 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Objetivos Específicos - Práctica (Presentador 1)</h2>
+                <h2>Objetivos Específicos - Práctica (Presentador 1)</h2>
                 <ul>
-                    <li class="fragment fade-in">Generar datos en Excel para simular tiempos entre eventos con distintos valores de λ.</li>
-                    <li class="fragment fade-in">Crear gráficos para visualizar el comportamiento de la distribución.</li>
-                    <li class="fragment fade-in">Identificar patrones visuales según el parámetro λ (tasa de eventos).</li>
+                    <li>Generar datos en Excel para simular tiempos entre eventos con distintos valores de λ.</li>
+                    <li>Crear gráficos para visualizar el comportamiento de la distribución.</li>
+                    <li>Identificar patrones visuales según el parámetro λ (tasa de eventos).</li>
                 </ul>
-                <img src="assets/excel_grafico.jpg" alt="Captura de pantalla de un gráfico de Excel (sugerencia: histograma)" style="width: 200px;">
+                <canvas id="lambdaChart" style="width: 50vw; height: 25vh;" class="animate__animated animate__fadeIn"></canvas>
+                <input type="range" id="lambdaSlider" min="0.1" max="2" step="0.1" value="0.2" onchange="updateLambdaChart()" class="interactive">
             </section>
 
-            <!-- Diapositiva 7: Metodología - Enfoque Mixto -->
+            <!-- Diapositiva 7 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Metodología - Enfoque Mixto (Presentador 1)</h2>
+                <h2>Metodología - Enfoque Mixto (Presentador 1)</h2>
                 <ul>
-                    <li class="fragment fade-in">Combina métodos cuantitativos (datos en Excel) y descriptivos (explicación teórica).</li>
-                    <li class="fragment fade-in">Cuantitativo: Simular tiempos entre eventos para analizar patrones.</li>
-                    <li class="fragment fade-in">Descriptivo: Explicar propiedades y aplicaciones de forma clara.</li>
+                    <li>Combina métodos cuantitativos (datos en Excel) y descriptivos (explicación teórica).</li>
+                    <li><strong>Cuantitativo:</strong> Simular tiempos entre eventos para analizar patrones.</li>
+                    <li><strong>Descriptivo:</strong> Explicar propiedades y aplicaciones de forma clara.</li>
                 </ul>
-                <img src="assets/venn_diagrama.png" alt="Diagrama de Venn mostrando la integración de enfoques" style="width: 200px;">
+                <img src="assets/venn_diagram.jpg" style="width: 40vw;" class="animate__animated animate__zoomIn">
             </section>
 
-            <!-- Diapositiva 8: Tipo de Investigación -->
+            <!-- Diapositiva 8 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Tipo de Investigación (Presentador 2)</h2>
+                <h2>Tipo de Investigación (Presentador 2)</h2>
                 <ul>
-                    <li class="fragment fade-in">Cuantitativa: Generar datos numéricos que representen tiempos entre eventos.</li>
-                    <li class="fragment fade-in">Descriptiva: Organizar información para facilitar su comprensión en el curso.</li>
-                    <li class="fragment fade-in">Ejemplo: Simular llegadas de clientes a una tienda cada 10 minutos (λ = 0.1).</li>
+                    <li><strong>Cuantitativa:</strong> Generar datos numéricos que representen tiempos entre eventos.</li>
+                    <li><strong>Descriptiva:</strong> Organizar información para facilitar su comprensión en el curso.</li>
+                    <li><strong>Ejemplo:</strong> Simular llegadas de clientes a una tienda cada 10 minutos (λ = 0.1).</li>
                 </ul>
-                <img src="assets/tienda_clientes.jpg" alt="Imagen de una tienda con clientes y un cronómetro" style="width: 200px;">
+                <img src="assets/store_customers.jpg" style="width: 40vw;" class="animate__animated animate__slideInRight">
             </section>
 
-            <!-- Diapositiva 9: Población y Muestra -->
+            <!-- Diapositiva 9 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Población y Muestra (Presentador 2)</h2>
+                <h2>Población y Muestra (Presentador 2)</h2>
                 <ul>
-                    <li class="fragment fade-in">Población: Eventos aleatorios modelados por la distribución exponencial (ej., fallos de equipos, llegadas).</li>
-                    <li class="fragment fade-in">Muestra: Datos generados en Excel con diferentes valores de λ (ej., 0.1, 0.5, 1).</li>
-                    <li class="fragment fade-in">Ventaja: Permite estudiar comportamientos sin datos reales.</li>
+                    <li><strong>Población:</strong> Eventos aleatorios modelados por la distribución exponencial (ej., fallos de equipos, llegadas).</li>
+                    <li><strong>Muestra:</strong> Datos generados en Excel con diferentes valores de λ (ej., 0.1, 0.5, 1).</li>
+                    <li><strong>Ventaja:</strong> Permite estudiar comportamientos sin datos reales.</li>
                 </ul>
-                <img src="assets/excel_tabla.jpg" alt="Tabla de Excel con datos simulados" style="width: 200px;">
+                <table id="sampleTable">
+                    <tr><th>λ</th><th>Tiempo (min)</th></tr>
+                </table>
+                <button onclick="generateSampleData()" class="interactive">Generar Datos</button>
             </section>
 
-            <!-- Diapositiva 10: Instrumentos de Investigación -->
+            <!-- Diapositiva 10 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Instrumentos de Investigación (Presentador 2)</h2>
+                <h2>Instrumentos de Investigación (Presentador 2)</h2>
                 <ul>
-                    <li class="fragment fade-in">Herramienta principal: Microsoft Excel para generar datos y gráficos.</li>
-                    <li class="fragment fade-in">Fuentes secundarias: Libros académicos (Devore, Ross) y recursos educativos en línea.</li>
-                    <li class="fragment fade-in">Ventaja de Excel: Fácil manejo de datos y visualización de distribuciones.</li>
+                    <li><strong>Herramienta principal:</strong> Microsoft Excel para generar datos y gráficos.</li>
+                    <li><strong>Fuentes secundarias:</strong> Libros académicos (Devore, Ross) y recursos educativos en línea.</li>
+                    <li><strong>Ventaja de Excel:</strong> Fácil manejo de datos y visualización de distribuciones.</li>
                 </ul>
-                <img src="assets/excel_logo.jpg" alt="Logo de Excel y portadas de libros citados" style="width: 200px;">
+                <img src="assets/excel_logo.jpg" style="width: 20vw;" class="animate__animated animate__fadeIn">
+                <img src="assets/devore_book.jpg" style="width: 20vw;" class="animate__animated animate__fadeIn" delay="0.5s">
+                <img src="assets/ross_book.jpg" style="width: 20vw;" class="animate__animated animate__fadeIn" delay="1s">
             </section>
 
-            <!-- Diapositiva 11: Tratamiento de Datos -->
+            <!-- Diapositiva 11 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Tratamiento de Datos (Presentador 2)</h2>
-                <ol>
-                    <li class="fragment fade-in">Generar tiempos entre eventos en Excel.</li>
-                    <li class="fragment fade-in">Organizar en tablas para análisis.</li>
-                    <li class="fragment fade-in">Crear gráficos (histogramas, curvas de densidad) para comparar λ.</li>
-                    <li class="fragment fade-in">Conectar patrones observados con teoría y aplicaciones.</li>
-                </ol>
-                <img src="assets/excel_grafico2.jpg" alt="Ejemplo de tabla y gráfico de Excel" style="width: 200px;">
-            </section>
-
-            <!-- Diapositiva 12: Análisis Visual de Datos -->
-            <section>
-                <h2 class="animate__animated animate__bounceIn">Análisis Visual de Datos (Presentador 2)</h2>
+                <h2>Tratamiento de Datos (Presentador 2)</h2>
                 <ul>
-                    <li class="fragment fade-in">Generar histogramas para mostrar la frecuencia de tiempos entre eventos.</li>
-                    <li class="fragment fade-in">Curvas de densidad para visualizar la forma de la distribución exponencial.</li>
-                    <li class="fragment fade-in">Ejemplo: Comparar λ = 0.2 (eventos raros) vs. λ = 1 (eventos frecuentes).</li>
+                    <li><strong>Proceso:</strong> Generar tiempos entre eventos en Excel.</li>
+                    <li>Organizar en tablas para análisis.</li>
+                    <li>Crear gráficos (histogramas, curvas de densidad) para comparar λ.</li>
+                    <li>Conectar patrones observados con teoría y aplicaciones.</li>
                 </ul>
-                <canvas id="expChart2" width="250" height="125"></canvas> <!-- Gráfico comparativo de curvas -->
+                <table id="dataTable">
+                    <tr><th>Evento</th><th>Tiempo (min)</th></th></tr>
+                </table>
+                <canvas id="densityChart" style="width: 50vw; height: 25vh;" class="animate__animated animate__fadeIn"></canvas>
+                <button onclick="generateDataChart()" class="interactive">Visualizar Datos</button>
             </section>
 
-            <!-- Diapositiva 13: Marco Teórico - Fundamentos -->
+            <!-- Diapositiva 12 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Marco Teórico - Fundamentos (Presentador 2)</h2>
+                <h2>Análisis Visual de Datos (Presentador 2)</h2>
                 <ul>
-                    <li class="fragment fade-in">Distribución exponencial: Modela el tiempo hasta un evento aleatorio.</li>
-                    <li class="fragment fade-in">Parámetro λ: Tasa de ocurrencia (eventos por unidad de tiempo).</li>
-                    <li class="fragment fade-in">Ejemplo: Si λ = 0.5, se esperan 0.5 eventos por hora (2 horas entre eventos).</li>
+                    <li>Generar histogramas para mostrar la frecuencia de tiempos entre eventos.</li>
+                    <li>Curvas de densidad para visualizar la forma de la distribución exponencial.</li>
+                    <li><strong>Ejemplo:</strong> Comparar λ = 0.2 (eventos raros) vs. λ = 1 (eventos frecuentes).</li>
                 </ul>
-                <canvas id="expChart3" width="250" height="125"></canvas> <!-- Curva exponencial con λ anotado -->
+                <canvas id="compareChart" style="width: 50vw; height: 25vh;" class="animate__animated animate__fadeIn"></canvas>
+                <input type="range" id="compareSlider" min="0.1" max="1" step="0.1" value="0.2" onchange="updateCompareChart()" class="interactive">
             </section>
 
-            <!-- Diapositiva 14: Propiedad Sin Memoria -->
+            <!-- Diapositiva 13 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Propiedad Sin Memoria (Presentador 3)</h2>
+                <h2>Marco Teórico - Fundamentos (Presentador 2)</h2>
+                <p>Distribución exponencial: Modela el tiempo hasta un evento aleatorio.</p>
+                <p><strong>Parámetro λ:</strong> Tasa de ocurrencia (eventos por unidad de tiempo).</p>
+                <p><strong>Ejemplo:</strong> Si λ = 0.5, se esperan 0.5 eventos por hora (2 horas entre eventos).</p>
+                <canvas id="lambdaCurve" style="width: 50vw; height: 25vh;" class="animate__animated animate__fadeIn"></canvas>
+            </section>
+
+            <!-- Diapositiva 14 -->
+            <section>
+                <h2>Propiedad Sin Memoria (Presentador 3)</h2>
                 <ul>
-                    <li class="fragment fade-in">Característica única: La probabilidad futura no depende del tiempo pasado.</li>
-                    <li class="fragment fade-in">Ejemplo: Una bombilla con 1000 horas de uso tiene la misma probabilidad de durar 100 horas más que una nueva.</li>
-                    <li class="fragment fade-in">Relevancia: Simplifica cálculos en fiabilidad.</li>
+                    <li><strong>Característica única:</strong> La probabilidad futura no depende del tiempo pasado.</li>
+                    <li><strong>Ejemplo:</strong> Una bombilla con 1000 horas de uso tiene la misma probabilidad de durar 100 horas más que una nueva.</li>
+                    <li><strong>Relevancia:</strong> Simplifica cálculos en fiabilidad.</li>
                 </ul>
-                <img src="assets/bombilla.jpg" alt="Imagen de una bombilla con un temporizador" style="width: 200px;">
+                <img src="assets/bulb_timer.jpg" style="width: 40vw;" class="animate__animated animate__zoomIn">
             </section>
 
-            <!-- Diapositiva 15: Propiedad Sin Memoria - Matemática -->
+            <!-- Diapositiva 15 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Propiedad Sin Memoria - Matemática (Presentador 3)</h2>
-                <p class="fragment katex-animate" data-katex="P(T > t + s | T > t) = P(T > s)"></p>
-                <p class="fragment fade-in">T: Tiempo, t: Tiempo transcurrido, s: Tiempo adicional.</p>
-                <p class="fragment fade-in">Ejemplo: Si un servidor no falla en 10 días, la probabilidad de no fallar en 5 días más es la misma que desde el inicio.</p>
-                <canvas id="expChart3" width="250" height="125"></canvas> <!-- Gráfico de probabilidad -->
+                <h2>Propiedad Sin Memoria - Matemática (Presentador 3)</h2>
+                <p>Fórmula: P(T > t + s | T > t) = P(T > s)</p>
+                <p>T: Tiempo, t: Tiempo transcurrido, s: Tiempo adicional.</p>
+                <p><strong>Ejemplo:</strong> Si un servidor no falla en 10 días, la probabilidad de no fallar en 5 días más es la misma que desde el inicio.</p>
+                <canvas id="memoryChart" style="width: 50vw; height: 25vh;" class="animate__animated animate__fadeIn"></canvas>
             </section>
 
-            <!-- Diapositiva 16: Tasa de Riesgo Constante -->
+            <!-- Diapositiva 16 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Tasa de Riesgo Constante (Presentador 3)</h2>
+                <h2>Tasa de Riesgo Constante (Presentador 3)</h2>
                 <ul>
-                    <li class="fragment fade-in">La probabilidad de un evento en un intervalo pequeño es constante.</li>
-                    <li class="fragment fade-in">Sin “desgaste” acumulativo, a diferencia de otros modelos.</li>
-                    <li class="fragment fade-in">Ejemplo: Un componente electrónico tiene la misma probabilidad de fallo en cualquier momento.</li>
+                    <li>La probabilidad de un evento en un intervalo pequeño es constante.</li>
+                    <li>Sin “desgaste” acumulativo, a diferencia de otros modelos.</li>
+                    <li><strong>Ejemplo:</strong> Un componente electrónico tiene la misma probabilidad de fallo en cualquier momento.</li>
                 </ul>
-                <img src="assets/componente.jpg" alt="Línea plana representando la tasa de riesgo constante" style="width: 200px;">
+                <canvas id="riskChart" style="width: 50vw; height: 25vh;" class="animate__animated animate__fadeIn"></canvas>
             </section>
 
-            <!-- Diapositiva 17: Relación con Poisson -->
+            <!-- Diapositiva 17 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Relación con Poisson (Presentador 3)</h2>
+                <h2>Relación con Poisson (Presentador 3)</h2>
                 <ul>
-                    <li class="fragment fade-in">Poisson: Número de eventos en un intervalo fijo (ej., 3 fallos por hora).</li>
-                    <li class="fragment fade-in">Exponencial: Tiempo entre esos eventos (ej., 20 minutos entre fallos).</li>
-                    <li class="fragment fade-in">Conexión: Si los eventos son Poisson con tasa λ, los tiempos son exponenciales con λ.</li>
+                    <li><strong>Poisson:</strong> Número de eventos en un intervalo fijo (ej., 3 fallos por hora).</li>
+                    <li><strong>Exponencial:</strong> Tiempo entre esos eventos (ej., 20 minutos entre fallos).</li>
+                    <li><strong>Conexión:</strong> Si los eventos son Poisson con tasa λ, los tiempos son exponenciales con λ.</li>
                 </ul>
-                <img src="assets/poisson_diagrama.jpg" alt="Diagrama comparativo Poisson vs. Exponencial" style="width: 200px;">
+                <canvas id="poissonChart" style="width: 50vw; height: 25vh;" class="animate__animated animate__fadeIn"></canvas>
             </section>
 
-            <!-- Diapositiva 18: Aplicaciones - Panorama General -->
+            <!-- Diapositiva 18 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Aplicaciones - Panorama General (Presentador 3)</h2>
+                <h2>Aplicaciones - Panorama General (Presentador 3)</h2>
                 <ul>
-                    <li class="fragment fade-in">Áreas clave: Mantenimiento y fiabilidad (industria, electrónica).</li>
-                    <li class="fragment fade-in">Gestión de proyectos (construcción, TI).</li>
-                    <li class="fragment fade-in">Seguridad de redes (ciberseguridad).</li>
+                    <li><strong>Áreas clave:</strong> Mantenimiento y fiabilidad (industria, electrónica).</li>
+                    <li><strong>Gestión de proyectos:</strong> (construcción, TI).</li>
+                    <li><strong>Seguridad de redes:</strong> (ciberseguridad).</li>
                 </ul>
-                <p class="fragment fade-in">Impacto: Reduce costos y optimiza planificación.</p>
-                <img src="assets/iconos_aplicaciones.jpg" alt="Iconos de una fábrica, un proyecto y un servidor" style="width: 200px;">
+                <p><strong>Impacto:</strong> Reduce costos y optimiza planificación.</p>
+                <img src="assets/application_collage.jpg" style="width: 50vw;" class="animate__animated animate__slideInUp">
             </section>
 
-            <!-- Diapositiva 19: Mantenimiento y Fiabilidad -->
+            <!-- Diapositiva 19 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Mantenimiento y Fiabilidad (Presentador 3)</h2>
+                <h2>Mantenimiento y Fiabilidad (Presentador 3)</h2>
                 <ul>
-                    <li class="fragment fade-in">Modela tiempos entre fallos de equipos (ej., turbinas, servidores).</li>
-                    <li class="fragment fade-in">Ejemplo: Si un motor falla cada 5000 horas (λ = 1/5000), calcula la probabilidad de operar 6000 horas sin fallos.</li>
-                    <li class="fragment fade-in">Beneficio: Planifica mantenimientos preventivos, reduce paradas.</li>
+                    <li>Modela tiempos entre fallos de equipos (ej., turbinas, servidores).</li>
+                    <li><strong>Ejemplo:</strong> Si un motor falla cada 5000 horas (λ = 1/5000), calcula la probabilidad de operar 6000 horas sin fallos.</li>
+                    <li><strong>Beneficio:</strong> Planifica mantenimientos preventivos, reduce paradas.</li>
                 </ul>
-                <img src="assets/maquina.jpg" alt="Imagen de una máquina industrial con un gráfico de fiabilidad" style="width: 200px;">
+                <img src="assets/industrial_machine.jpg" style="width: 40vw;" class="animate__animated animate__zoomIn">
             </section>
 
-            <!-- Diapositiva 20: Gestión de Proyectos -->
+            <!-- Diapositiva 20 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Gestión de Proyectos (Presentador 4)</h2>
+                <h2>Gestión de Proyectos (Presentador 4)</h2>
                 <ul>
-                    <li class="fragment fade-in">Modela tiempos entre retrasos inesperados (ej., problemas en obra).</li>
-                    <li class="fragment fade-in">Ejemplo: Si hay un contratiempo cada 20 días (λ = 0.05), calcula la probabilidad de 30 días sin problemas.</li>
-                    <li class="fragment fade-in">Beneficio: Mejora la planificación y reduce riesgos en plazos.</li>
+                    <li>Modela tiempos entre retrasos inesperados (ej., problemas en obra).</li>
+                    <li><strong>Ejemplo:</strong> Si hay un contratiempo cada 20 días (λ = 0.05), calcula la probabilidad de 30 días sin problemas.</li>
+                    <li><strong>Beneficio:</strong> Mejora la planificación y reduce riesgos en plazos.</li>
                 </ul>
-                <img src="assets/cronograma.jpg" alt="Cronograma de proyecto con eventos aleatorios marcados" style="width: 200px;">
+                <img src="assets/project_timeline.jpg" style="width: 40vw;" class="animate__animated animate__slideInRight">
             </section>
 
-            <!-- Diapositiva 21: Seguridad de Redes -->
+            <!-- Diapositiva 21 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Seguridad de Redes (Presentador 4)</h2>
+                <h2>Seguridad de Redes (Presentador 4)</h2>
                 <ul>
-                    <li class="fragment fade-in">Modela tiempos entre fallos o ataques cibernéticos.</li>
-                    <li class="fragment fade-in">Ejemplo: Un servidor sufre ataques cada 15 días (λ = 1/15). Estima la probabilidad de 20 días sin ataques.</li>
-                    <li class="fragment fade-in">Beneficio: Optimiza estrategias de respaldo y prevención.</li>
+                    <li>Modela tiempos entre fallos o ataques cibernéticos.</li>
+                    <li><strong>Ejemplo:</strong> Un servidor sufre ataques cada 15 días (λ = 1/15). Estima la probabilidad de 20 días sin ataques.</li>
+                    <li><strong>Beneficio:</strong> Optimiza estrategias de respaldo y prevención.</li>
                 </ul>
-                <img src="assets/servidor_candado.jpg" alt="Imagen de un servidor con un candado digital" style="width: 200px;">
+                <img src="assets/server_lock.jpg" style="width: 40vw;" class="animate__animated animate__fadeIn">
             </section>
 
-            <!-- Diapositiva 22: Ejemplo Práctico - Cálculo -->
+            <!-- Diapositiva 22 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Ejemplo Práctico - Cálculo (Presentador 4)</h2>
-                <p class="fragment fade-in">Caso: Un call center recibe llamadas cada 10 minutos (λ = 0.1).</p>
-                <p class="fragment fade-in">Pregunta: ¿Cuál es la probabilidad de esperar más de 15 minutos por la próxima llamada?</p>
-                <p class="fragment katex-animate" data-katex="P(T > 15) = e^{-0.1 \cdot 15} \approx 0.223 (22.3\%)">Cálculo: 22.3%.</p>
-                <canvas id="dynamicChart" width="250" height="125"></canvas> <!-- Gráfico con área sombreada para T > 15 -->
+                <h2>Ejemplo Práctico - Cálculo (Presentador 4)</h2>
+                <p><strong>Caso:</strong> Un call center recibe llamadas cada 10 minutos (λ = 0.1).</p>
+                <p><strong>Pregunta:</strong> ¿Cuál es la probabilidad de esperar más de 15 minutos por la próxima llamada?</p>
+                <p id="calcResult">Cálculo: P(T > 15) = e^(-λt) = e^(-0.1*15) ≈ 0.223 (22.3%)</p>
+                <canvas id="calcChart" style="width: 50vw; height: 25vh;" class="animate__animated animate__fadeIn"></canvas>
+                <button onclick="updateCalculation()" class="interactive">Recalcular</button>
             </section>
 
-            <!-- Diapositiva 23: Visualización en Excel - Proceso -->
+            <!-- Diapositiva 23 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Visualización en Excel - Proceso (Presentador 4)</h2>
+                <h2>Visualización en Excel - Proceso (Presentador 4)</h2>
                 <ul>
-                    <li class="fragment fade-in">Generar datos: Usar función =-(1/λ)*LN(ALEATORIO()) en Excel para simular tiempos.</li>
-                    <li class="fragment fade-in">Crear histogramas y curvas de densidad para λ = 0.1, 0.5, 1.</li>
-                    <li class="fragment fade-in">Comparar: λ mayor implica eventos más frecuentes, curva más empinada.</li>
+                    <li><strong>Generar datos:</strong> Usar función =-(1/λ)*LN(ALEATORIO()) en Excel para simular tiempos.</li>
+                    <li>Crear histogramas y curvas de densidad para λ = 0.1, 0.5, 1.</li>
+                    <li><strong>Comparar:</strong> λ mayor implica eventos más frecuentes, curva más empinada.</li>
                 </ul>
-                <img src="assets/excel_histograma.jpg" alt="Captura de pantalla de Excel con histograma y fórmula" style="width: 200px;">
+                <table id="excelTable">
+                    <tr><th>λ</th><th>Tiempo (min)</th></tr>
+                </table>
+                <button onclick="generateExcelData()" class="interactive">Generar Datos Excel</button>
             </section>
 
-            <!-- Diapositiva 24: Visualización en Excel - Resultados -->
+            <!-- Diapositiva 24 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Visualización en Excel - Resultados (Presentador 4)</h2>
+                <h2>Visualización en Excel - Resultados (Presentador 4)</h2>
                 <ul>
-                    <li class="fragment fade-in">Resultados: Histogramas muestran distribución sesgada a la derecha.</li>
-                    <li class="fragment fade-in">Curvas de densidad: f(x) = λe^(-λx), más pronunciada para λ grande.</li>
-                    <li class="fragment fade-in">Ejemplo: λ = 0.1 (eventos raros) vs. λ = 1 (eventos frecuentes).</li>
+                    <li><strong>Resultados:</strong> Histogramas muestran distribución sesgada a la derecha.</li>
+                    <li><strong>Curvas de densidad:</strong> f(x) = λe^(-λx), más pronunciada para λ grande.</li>
+                    <li><strong>Ejemplo:</strong> λ = 0.1 (eventos raros) vs. λ = 1 (eventos frecuentes).</li>
                 </ul>
-                <canvas id="expChart3" width="250" height="125"></canvas> <!-- Gráfico comparativo de histogramas -->
+                <canvas id="resultChart" style="width: 50vw; height: 25vh;" class="animate__animated animate__fadeIn"></canvas>
             </section>
 
-            <!-- Diapositiva 25: Conclusión -->
-            <section>
-                <h2 class="animate__animated animate__bounceIn">Conclusión (Todos los Presentadores)</h2>
+            <!-- Diapositiva 25 -->
+            <section data-transition="slide">
+                <h2>Conclusión (Todos los Presentadores)</h2>
                 <ul>
-                    <li class="fragment fade-in">La distribución exponencial es una herramienta poderosa para modelar eventos aleatorios.</li>
-                    <li class="fragment fade-in">Propiedades únicas: Sin memoria, tasa de riesgo constante.</li>
-                    <li class="fragment fade-in">Aplicaciones prácticas: Mantenimiento, proyectos, ciberseguridad.</li>
-                    <li class="fragment fade-in">Excel facilita la simulación y visualización de datos.</li>
+                    <li>La distribución exponencial es una herramienta poderosa para modelar eventos aleatorios.</li>
+                    <li><strong>Propiedades únicas:</strong> Sin memoria, tasa de riesgo constante.</li>
+                    <li><strong>Aplicaciones prácticas:</strong> Mantenimiento, proyectos, ciberseguridad.</li>
+                    <li>Excel facilita la simulación y visualización de datos.</li>
                 </ul>
-                <img src="assets/collage_aplicaciones.jpg" alt="Collage de aplicaciones (máquina, proyecto, servidor)" style="width: 200px;">
+                <img src="assets/application_collage.jpg" style="width: 50vw;" class="animate__animated animate__zoomIn">
             </section>
 
-            <!-- Diapositiva 26: Referencias -->
+            <!-- Diapositiva 26 -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">Referencias (Todos los Presentadores)</h2>
+                <h2>Referencias (Todos los Presentadores)</h2>
                 <ul>
-                    <li class="fragment fade-in">Devore, J. L. (2016). Probability and Statistics for Engineering and the Sciences.</li>
-                    <li class="fragment fade-in">Hogg, R. V., et al. (2015). Probability and Statistical Inference.</li>
-                    <li class="fragment fade-in">Ross, S. M. (2019). Introduction to Probability Models.</li>
-                    <li class="fragment fade-in">Walpole, R. E., et al. (2017). Probability and Statistics for Engineers and Scientists.</li>
+                    <li>Devore, J. L. (2016). <em>Probability and Statistics for Engineering and the Sciences</em>.</li>
+                    <li>Hogg, R. V., et al. (2015). <em>Probability and Statistical Inference</em>.</li>
+                    <li>Ross, S. M. (2019). <em>Introduction to Probability Models</em>.</li>
+                    <li>Walpole, R. E., et al. (2017). <em>Probability and Statistics for Engineers and Scientists</em>.</li>
                 </ul>
-                <img src="assets/libros_academicos.jpg" alt="Portadas de los libros citados con un fondo académico" style="width: 200px;">
+                <img src="assets/academic_background.jpg" style="width: 60vw;" class="animate__animated animate__fadeIn">
             </section>
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reveal.min.js"></script>
-    <script src="mm1-simulation.js"></script>
-    <script src="poisson-simulation.js"></script>
-    <script src="audio-effects1.js"></script>
-    <script src="animations1.js"></script>
-    <script src="scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/confetti.js/2.0.4/confetti.browser.min.js"></script>
+    <script>
+        Reveal.initialize({ hash: true, transition: 'zoom', width: '100%', height: '100%', margin: 0.05, minScale: 0.2, maxScale: 1.5 });
+
+        // Charts and Interactivity
+        window.expCurve1 = new Chart(document.getElementById('expCurve1').getContext('2d'), {
+            type: 'line', data: { labels: Array(50).fill().map((_, i) => i/10), datasets: [{ label: 'Curva Exponencial', data: Array(50).fill().map((_, i) => Math.exp(-0.5 * (i/10))), borderColor: '#00ff9f', fill: true, pointRadius: 5, pointHoverRadius: 10 }] },
+            options: { responsive: true, animation: { duration: 2000, easing: 'easeInOutQuad' }, scales: { x: { title: { display: true, text: 'Tiempo' } }, y: { title: { display: true, text: 'Probabilidad' } } } }
+        });
+
+        window.pieChart = new Chart(document.getElementById('pieChart').getContext('2d'), {
+            type: 'pie', data: { labels: ['Objetivos', 'Metodología', 'Teoría', 'Aplicaciones', 'Visualización'], datasets: [{ data: [20, 20, 20, 20, 20], backgroundColor: ['#00f2ff', '#ff00ff', '#00ff9f', '#ff4d4d', '#4d4dff'] }] },
+            options: { responsive: true, animation: { animateRotate: true, duration: 2000 } }
+        });
+
+        window.queueChart = new Chart(document.getElementById('queueChart').getContext('2d'), {
+            type: 'bar', data: { labels: ['0-5', '5-10', '10-15'], datasets: [{ label: 'Clientes Esperando', data: [30, 20, 10], backgroundColor: '#00ff9f' }] },
+            options: { responsive: true, scales: { y: { beginAtZero: true, title: { display: true, text: 'Cantidad' } } } }
+        });
+
+        window.lambdaChart = new Chart(document.getElementById('lambdaChart').getContext('2d'), {
+            type: 'line', data: { labels: Array(50).fill().map((_, i) => i/10), datasets: [{ label: 'λ = 0.2', data: Array(50).fill().map((_, i) => 0.2 * Math.exp(-0.2 * (i/10))), borderColor: '#00f2ff', fill: true }] },
+            options: { responsive: true, scales: { x: { title: { display: true, text: 'Tiempo' } }, y: { title: { display: true, text: 'f(x)' } } } }
+        });
+
+        window.densityChart = new Chart(document.getElementById('densityChart').getContext('2d'), {
+            type: 'line', data: { labels: Array(50).fill().map((_, i) => i/10), datasets: [{ label: 'Densidad (λ = 0.5)', data: Array(50).fill().map((_, i) => 0.5 * Math.exp(-0.5 * (i/10))), borderColor: '#ff00ff', fill: true }] },
+            options: { responsive: true }
+        });
+
+        window.compareChart = new Chart(document.getElementById('compareChart').getContext('2d'), {
+            type: 'line', data: { labels: Array(50).fill().map((_, i) => i/10), datasets: [{ label: 'λ = 0.2', data: Array(50).fill().map((_, i) => 0.2 * Math.exp(-0.2 * (i/10))), borderColor: '#00f2ff', fill: true }, { label: 'λ = 1', data: Array(50).fill().map((_, i) => Math.exp(-1 * (i/10))), borderColor: '#ff00ff', fill: true }] },
+            options: { responsive: true }
+        });
+
+        window.lambdaCurve = new Chart(document.getElementById('lambdaCurve').getContext('2d'), {
+            type: 'line', data: { labels: Array(50).fill().map((_, i) => i/10), datasets: [{ label: 'λ = 0.5', data: Array(50).fill().map((_, i) => 0.5 * Math.exp(-0.5 * (i/10))), borderColor: '#00ff9f', fill: true }] },
+            options: { responsive: true }
+        });
+
+        window.memoryChart = new Chart(document.getElementById('memoryChart').getContext('2d'), {
+            type: 'line', data: { labels: Array(50).fill().map((_, i) => i/10), datasets: [{ label: 'Probabilidad', data: Array(50).fill().map((_, i) => Math.exp(-0.5 * (i/10))), borderColor: '#ff4d4d', fill: true }] },
+            options: { responsive: true }
+        });
+
+        window.riskChart = new Chart(document.getElementById('riskChart').getContext('2d'), {
+            type: 'line', data: { labels: Array(50).fill().map((_, i) => i/10), datasets: [{ label: 'Tasa de Riesgo', data: Array(50).fill(0.5), borderColor: '#ff00ff', fill: true }] },
+            options: { responsive: true }
+        });
+
+        window.poissonChart = new Chart(document.getElementById('poissonChart').getContext('2d'), {
+            type: 'bar', data: { labels: ['0', '1', '2', '3'], datasets: [{ label: 'Eventos (λ = 3)', data: [0.05, 0.15, 0.22, 0.17], backgroundColor: '#00f2ff' }] },
+            options: { responsive: true, scales: { y: { beginAtZero: true, title: { display: true, text: 'Probabilidad' } } } }
+        });
+
+        window.calcChart = new Chart(document.getElementById('calcChart').getContext('2d'), {
+            type: 'line', data: { labels: Array(50).fill().map((_, i) => i/10), datasets: [{ label: 'λ = 0.1', data: Array(50).fill().map((_, i) => 0.1 * Math.exp(-0.1 * (i/10))), borderColor: '#00ff9f', fill: true, backgroundColor: 'rgba(0, 255, 159, 0.2)' }] },
+            options: { responsive: true }
+        });
+
+        window.resultChart = new Chart(document.getElementById('resultChart').getContext('2d'), {
+            type: 'bar', data: { labels: Array(10).fill().map((_, i) => i), datasets: [{ label: 'λ = 0.1', data: Array(10).fill().map(() => Math.random() * 10), backgroundColor: '#00f2ff' }, { label: 'λ = 1', data: Array(10).fill().map(() => Math.random() * 20), backgroundColor: '#ff00ff' }] },
+            options: { responsive: true, scales: { y: { beginAtZero: true, title: { display: true, text: 'Frecuencia' } } } }
+        });
+
+        // Interactivity Functions
+        function animateEvents() { confetti({ particleCount: 200, spread: 70, colors: ['#00f2ff', '#ff00ff'] }); }
+        function updatePieChart() { pieChart.data.datasets[0].data = [20, 20, 20, 20, 20].map(v => v + Math.random() * 10); pieChart.update(); }
+        function calculateProbability() { alert('Probabilidad > 10 min = ' + (Math.exp(-0.2 * 10) * 100).toFixed(1) + '%'); queueChart.data.datasets[0].data = [30, 20, 10].map(v => v + Math.random() * 5); queueChart.update(); }
+        function updateLambdaChart() { let lambda = document.getElementById('lambdaSlider').value; lambdaChart.data.datasets[0].data = Array(50).fill().map((_, i) => lambda * Math.exp(-lambda * (i/10))); lambdaChart.update(); }
+        function generateSampleData() { let table = document.getElementById('sampleTable'); table.innerHTML = '<tr><th>λ</th><th>Tiempo (min)</th></tr>' + [0.1, 0.5, 1].map(l => `<tr><td>${l}</td><td>${(-1/l * Math.log(Math.random())).toFixed(1)}</td></tr>`).join(''); }
+        function generateDataChart() { let table = document.getElementById('dataTable'); table.innerHTML = '<tr><th>Evento</th><th>Tiempo (min)</th></tr>' + Array(5).fill().map((_, i) => `<tr><td>${i+1}</td><td>${(-1/0.5 * Math.log(Math.random())).toFixed(1)}</td></tr>`).join(''); densityChart.data.datasets[0].data = Array(50).fill().map((_, i) => 0.5 * Math.exp(-0.5 * (i/10))); densityChart.update(); }
+        function updateCompareChart() { let lambda = document.getElementById('compareSlider').value; compareChart.data.datasets[0].data = Array(50).fill().map((_, i) => lambda * Math.exp(-lambda * (i/10))); compareChart.update(); }
+        function updateCalculation() { document.getElementById('calcResult').textContent = 'Cálculo: ' + (Math.exp(-0.1 * 15) * 100).toFixed(1) + '%'; calcChart.data.datasets[0].data = Array(50).fill().map((_, i) => 0.1 * Math.exp(-0.1 * (i/10))); calcChart.update(); }
+        function generateExcelData() { let table = document.getElementById('excelTable'); table.innerHTML = '<tr><th>λ</th><th>Tiempo (min)</th></tr>' + [0.1, 0.5, 1].map(l => `<tr><td>${l}</td><td>${(-1/l * Math.log(Math.random())).toFixed(1)}</td></tr>`).join(''); }
+    </script>
 </body>
 </html>
