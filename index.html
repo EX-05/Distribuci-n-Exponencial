@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Distribución Exponencial: Épica Universitaria</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=1.0, user-scalable=no">
+    <title>Distribución Exponencial: Épica</title>
     <!-- Reveal.js -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reveal.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/theme/black.min.css">
@@ -15,238 +15,318 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- KaTeX -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="styles.css">
-    <!-- Chart.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-    <!-- Particles.js -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <!-- Confeti -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <!-- KaTeX -->
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
 </head>
 <body>
-    <!-- Fondo de partículas -->
     <div id="particles-js"></div>
 
     <div class="reveal">
         <div class="slides">
-            <!-- Diapositiva 1: Portada -->
+            <!-- Diapositiva 1: Bienvenida -->
             <section>
-                <h1 class="animate__animated animate__zoomIn">Distribución Exponencial</h1>
-                <p class="animate__animated animate__fadeInUp">La Revolución de la Probabilidad</p>
-                <p class="animate__animated animate__fadeInUp" style="animation-delay: 0.5s;">Por [Nombres del Equipo]</p>
-                <i class="fas fa-rocket animate__animated animate__pulse" style="font-size: 2.5em;"></i>
+                <h1 class="animate__animated animate__zoomIn">Bienvenida a la Distribución Exponencial</h1>
+                <h2>Avance #1: Descifrando la Distribución Exponencial</h2>
+                <p>Grupo #6: Retana Elian Alessandro Rodríguez, Coto Eduardo Alberto Astacio, Rivera Daniel Cruz, Madrigal Jorge Eduardo Calderón</p>
+                <p>Curso: Probabilidad y Estadística Descriptiva, Lunes 2-5 pm</p>
+                <p>Docente: Herny Francisco Barrantes Alfaro</p>
+                <p class="fragment fade-in">“¿Cuánto tiempo esperas al próximo cliente o fallo? ¡Hoy lo descubriremos!”</p>
+                <canvas id="expChart1" width="250" height="125"></canvas> <!-- Fondo con curva exponencial animada y puntos -->
             </section>
 
-            <!-- Diapositiva 2: Definición -->
+            <!-- Diapositiva 2: ¿Qué Nos Motiva? -->
             <section>
-                <h2 class="animate__animated animate__bounceIn">¿Qué es esto?</h2>
-                <p class="fragment fade-in">Tiempo entre eventos aleatorios en un proceso de Poisson.</p>
-                <p class="fragment fade-in">Ejemplo: Espera por tacos en una taquería. 🌮</p>
-            </section>
-
-            <!-- Diapositiva 3: Simulación Poisson -->
-            <section>
-                <h2>Eventos en Acción</h2>
-                <canvas id="poissonSim" width="400" height="200"></canvas>
-                <p class="fragment fade-in">¡Partículas que simulan llegadas aleatorias!</p>
-            </section>
-
-            <!-- Diapositiva 4: Fórmula PDF -->
-            <section>
-                <h2>Fórmula de Densidad (PDF)</h2>
-                <p class="fragment katex-animate" data-katex="f(x) = \lambda e^{-\lambda x}, \quad x \geq 0"></p>
-                <p class="fragment fade-in">λ = tasa de eventos por unidad de tiempo.</p>
-            </section>
-
-            <!-- Diapositiva 5: Gráfico PDF -->
-            <section>
-                <h2>Visualizando la PDF</h2>
-                <canvas id="expChart1" width="400" height="200"></canvas>
-                <p class="fragment fade-in">λ = 1: ¡Decae como un relámpago!</p>
-            </section>
-
-            <!-- Diapositiva 6: Fórmula CDF -->
-            <section>
-                <h2>Fórmula de Distribución Acumulada (CDF)</h2>
-                <p class="fragment katex-animate" data-katex="F(x) = 1 - e^{-\lambda x}, \quad x \geq 0"></p>
-                <p class="fragment fade-in">Probabilidad de tiempo menor a x.</p>
-            </section>
-
-            <!-- Diapositiva 7: Derivación de la Media -->
-            <section>
-                <h2>Derivando la Media</h2>
-                <p class="fragment katex-animate" data-katex="E[X] = \int_0^\infty x \lambda e^{-\lambda x} \, dx = \frac{1}{\lambda}"></p>
-                <p class="fragment fade-in">Tiempo esperado entre eventos.</p>
-            </section>
-
-            <!-- Diapositiva 8: Propiedad Sin Memoria -->
-            <section>
-                <h2>Propiedad Sin Memoria</h2>
-                <p class="fragment fade-in">El pasado no importa: espera futura es independiente.</p>
-                <p class="fragment katex-animate" data-katex="P(X > s + t | X > s) = P(X > t)"></p>
-                <img src="https://media.giphy.com/media/l0Iyl55kTeh71nTWw/giphy.gif" alt="Memoria" style="width: 200px;">
-            </section>
-
-            <!-- Diapositiva 9: Media y Varianza -->
-            <section>
-                <h2>Media y Varianza</h2>
-                <p class="fragment katex-animate" data-katex="\text{Media} = \frac{1}{\lambda}"></p>
-                <p class="fragment katex-animate" data-katex="\text{Varianza} = \frac{1}{\lambda^2}"></p>
-                <p class="fragment fade-in">Si λ = 2, media = 0.5 min.</p>
-            </section>
-
-            <!-- Diapositiva 10: Gráfico Comparativo -->
-            <section>
-                <h2>Explorando λ</h2>
-                <canvas id="expChart2" width="400" height="200"></canvas>
-                <p class="fragment fade-in">λ = 0.5 vs λ = 2: ¡Contrastes épicos!</p>
-            </section>
-
-            <!-- Diapositiva 11: Aplicaciones -->
-            <section>
-                <h2>Aplicaciones Reales</h2>
+                <h2 class="animate__animated animate__bounceIn">¿Qué Nos Motiva? (Presentador 1)</h2>
+                <p class="fragment fade-in">La distribución exponencial modela el tiempo entre eventos aleatorios e independientes.</p>
                 <ul>
-                    <li class="fragment fade-in">Colas en taquerías</li>
-                    <li class="fragment fade-in">Respuestas en WhatsApp</li>
-                    <li class="fragment fade-in">Llamadas en call centers</li>
+                    <li class="fragment fade-in">Importancia: Predice comportamientos en industria, proyectos y tecnología.</li>
+                    <li class="fragment fade-in">Ejemplo introductorio: Tiempo hasta que un semáforo cambie o un servidor falle.</li>
                 </ul>
-                <img src="https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif" alt="Tacos" style="width: 200px;">
+                <p class="fragment fade-in">Dato extra: Usada en más del 60% de los modelos de fiabilidad industrial (Ross, 2019).</p>
+                <img src="assets/semaforo.jpg" alt="Semáforo o servidor con cronómetro" style="width: 200px;">
             </section>
 
-            <!-- Diapositiva 12: Ejemplo 1 -->
+            <!-- Diapositiva 3: Estructura de la Presentación -->
             <section>
-                <h2>Ejemplo: Taquería</h2>
-                <p class="fragment fade-in">λ = 2 clientes/minuto.</p>
-                <p class="fragment katex-animate" data-katex="P(X < 1) = 1 - e^{-2 \cdot 1} \approx 0.865"></p>
-            </section>
-
-            <!-- Diapositiva 13: Ejemplo 2 -->
-            <section>
-                <h2>Ejemplo: WhatsApp</h2>
-                <p class="fragment fade-in">λ = 0.1 respuestas/10 min.</p>
-                <p class="fragment katex-animate" data-katex="\text{Media} = \frac{1}{0.1} = 10 \text{ min}"></p>
-            </section>
-
-            <!-- Diapositiva 14: Ejemplo 3 -->
-            <section>
-                <h2>Ejemplo: Call Center</h2>
-                <p class="fragment fade-in">λ = 0.2 llamadas/5 min.</p>
-                <p class="fragment katex-animate" data-katex="P(X > 3) = e^{-0.2 \cdot 3} \approx 0.549"></p>
-            </section>
-
-            <!-- Diapositiva 15: Relación con Poisson -->
-            <section>
-                <h2>Exponencial y Poisson</h2>
-                <p class="fragment fade-in">Poisson cuenta, exponencial mide.</p>
-                <p class="fragment katex-animate" data-katex="\text{Poisson}(\lambda t) \leftrightarrow \text{Exponencial}(\lambda)"></p>
-            </section>
-
-            <!-- Diapositiva 16: Propiedades Clave -->
-            <section>
-                <h2>Propiedades Clave</h2>
+                <h2 class="animate__animated animate__bounceIn">Estructura de la Presentación (Presentador 1)</h2>
                 <ul>
-                    <li class="fragment fade-in">Siempre positiva: f(x) ≥ 0</li>
-                    <li class="fragment fade-in">Decae exponencialmente</li>
-                    <li class="fragment fade-in">Sin memoria: P(X > s + t | X > s) = P(X > t)</li>
+                    <li class="fragment fade-in">Objetivos: ¿Qué aprenderemos?</li>
+                    <li class="fragment fade-in">Metodología: ¿Cómo lo estudiamos?</li>
+                    <li class="fragment fade-in">Teoría: ¿Qué es la distribución exponencial?</li>
+                    <li class="fragment fade-in">Aplicaciones: ¿Dónde impacta?</li>
+                    <li class="fragment fade-in">Visualización: Datos y gráficos en Excel.</li>
                 </ul>
+                <p class="fragment fade-in">Nota: Enfatizar que cada sección conecta teoría con práctica.</p>
+                <img src="assets/diagrama_circular.png" alt="Diagrama circular animado" style="width: 200px;">
             </section>
 
-            <!-- Diapositiva 17: Gráfico Avanzado -->
+            <!-- Diapositiva 4: Objetivo General -->
             <section>
-                <h2>Más sobre λ</h2>
-                <canvas id="expChart3" width="400" height="200"></canvas>
-                <p class="fragment fade-in">λ = 1.5: ¡Poder intermedio!</p>
-            </section>
-
-            <!-- Diapositiva 18: Interactividad -->
-            <section>
-                <h2>¡Domina λ!</h2>
-                <input type="range" min="0.1" max="2" step="0.1" value="1" id="lambdaSlider" onchange="updateChart()">
-                <canvas id="dynamicChart" width="400" height="200"></canvas>
-                <p id="lambdaExplanation" class="fragment fade-in">Mueve λ y descubre su magia.</p>
-            </section>
-
-            <!-- Diapositiva 19: Mini-Juego -->
-            <section>
-                <h2>¡Adivina λ!</h2>
-                <p class="fragment fade-in">¿Cuál es λ en este gráfico?</p>
-                <canvas id="gameChart" width="400" height="200"></canvas>
-                <p class="fragment fade-in">Opciones: 0.5, 1, 1.5, 2</p>
-                <button onclick="showAnswer()">¡Revela!</button>
-                <p class="answer" style="display: none;">¡λ = 1.5! 🎉</p>
-            </section>
-
-            <!-- Diapositiva 20: Momentos -->
-            <section>
-                <h2>Momentos Épicos</h2>
-                <p class="fragment katex-animate" data-katex="E[X^n] = \frac{n!}{\lambda^n}"></p>
-                <p class="fragment fade-in">Primer momento = Media, segundo = Varianza.</p>
-            </section>
-
-            <!-- Diapositiva 21: Función Generadora -->
-            <section>
-                <h2>Función Generadora</h2>
-                <p class="fragment katex-animate" data-katex="M(t) = \frac{\lambda}{\lambda - t}, \quad t < \lambda"></p>
-                <p class="fragment fade-in">Clave para momentos superiores.</p>
-            </section>
-
-            <!-- Diapositiva 22: Simulación M/M/1 -->
-            <section>
-                <h2>Colas M/M/1 en 3D</h2>
-                <div id="mm1Sim"></div>
-                <p class="fragment fade-in">¡Visualiza colas en tiempo real!</p>
-            </section>
-
-            <!-- Diapositiva 23: Aplicaciones Avanzadas -->
-            <section>
-                <h2>Aplicaciones del Futuro</h2>
+                <h2 class="animate__animated animate__bounceIn">Objetivo General (Presentador 1)</h2>
+                <p class="fragment fade-in">Explorar las propiedades y usos prácticos de la distribución exponencial en probabilidad y estadística descriptiva.</p>
                 <ul>
-                    <li class="fragment fade-in">Modelos de colas (M/M/1)</li>
-                    <li class="fragment fade-in">Fiabilidad en ingeniería</li>
-                    <li class="fragment fade-in">Finanzas estocásticas</li>
+                    <li class="fragment fade-in">Enfoque: Modelar tiempos entre eventos aleatorios (ej., llegadas de clientes, fallos de máquinas).</li>
+                    <li class="fragment fade-in">Relevancia: Optimiza planificación y reduce riesgos en múltiples industrias.</li>
                 </ul>
+                <img src="assets/reloj_curva.png" alt="Icono de un reloj con curva exponencial decreciente" style="width: 200px;">
             </section>
 
-            <!-- Diapositiva 24: Resumen -->
+            <!-- Diapositiva 5: Objetivos Específicos - Teoría -->
             <section>
-                <h2>Resumen Final</h2>
+                <h2 class="animate__animated animate__bounceIn">Objetivos Específicos - Teoría (Presentador 1)</h2>
                 <ul>
-                    <li class="fragment fade-in">Tiempos entre eventos</li>
-                    <li class="fragment katex-animate" data-katex="f(x) = \lambda e^{-\lambda x}, \quad F(x) = 1 - e^{-\lambda x}"></li>
-                    <li class="fragment fade-in">Sin memoria, media = 1/λ, varianza = 1/λ²</li>
+                    <li class="fragment fade-in">Describir propiedades clave: sin memoria, tasa de riesgo constante.</li>
+                    <li class="fragment fade-in">Explicar cómo modela eventos aleatorios (ej., tiempo entre averías de un motor).</li>
+                    <li class="fragment fade-in">Ejemplo: Si un cajero atiende cada 5 minutos, ¿cuál es la probabilidad de esperar más de 10 minutos?</li>
                 </ul>
+                <img src="assets/fila_clientes.jpg" alt="Esquema de un evento aleatorio (clientes en una fila)" style="width: 200px;">
             </section>
 
-            <!-- Diapositiva 25: Easter Egg -->
-            <section data-state="easter-egg">
-                <h2>¡Secreto Cósmico!</h2>
-                <p class="animate__animated animate__shakeX">¡Matemáticas con humor!</p>
-                <img src="https://media.giphy.com/media/26tPplGWjN0xLybiU/giphy.gif" alt="Meme" style="width: 300px;">
-                <audio id="easterSound" src="https://www.soundjay.com/buttons/beep-01a.mp3"></audio>
-            </section>
-
-            <!-- Diapositiva 26: Cierre -->
+            <!-- Diapositiva 6: Objetivos Específicos - Práctica -->
             <section>
-                <h2>¡Legado Matemático!</h2>
-                <p class="animate__animated animate__bounce">Gracias por esta odisea</p>
-                <button onclick="launchConfetti()" class="animate__animated animate__pulse">¡Explosión de Gloria!</button>
-                <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Éxito" style="width: 200px;">
+                <h2 class="animate__animated animate__bounceIn">Objetivos Específicos - Práctica (Presentador 1)</h2>
+                <ul>
+                    <li class="fragment fade-in">Generar datos en Excel para simular tiempos entre eventos con distintos valores de λ.</li>
+                    <li class="fragment fade-in">Crear gráficos para visualizar el comportamiento de la distribución.</li>
+                    <li class="fragment fade-in">Identificar patrones visuales según el parámetro λ (tasa de eventos).</li>
+                </ul>
+                <img src="assets/excel_grafico.jpg" alt="Captura de pantalla de un gráfico de Excel (sugerencia: histograma)" style="width: 200px;">
+            </section>
+
+            <!-- Diapositiva 7: Metodología - Enfoque Mixto -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Metodología - Enfoque Mixto (Presentador 1)</h2>
+                <ul>
+                    <li class="fragment fade-in">Combina métodos cuantitativos (datos en Excel) y descriptivos (explicación teórica).</li>
+                    <li class="fragment fade-in">Cuantitativo: Simular tiempos entre eventos para analizar patrones.</li>
+                    <li class="fragment fade-in">Descriptivo: Explicar propiedades y aplicaciones de forma clara.</li>
+                </ul>
+                <img src="assets/venn_diagrama.png" alt="Diagrama de Venn mostrando la integración de enfoques" style="width: 200px;">
+            </section>
+
+            <!-- Diapositiva 8: Tipo de Investigación -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Tipo de Investigación (Presentador 2)</h2>
+                <ul>
+                    <li class="fragment fade-in">Cuantitativa: Generar datos numéricos que representen tiempos entre eventos.</li>
+                    <li class="fragment fade-in">Descriptiva: Organizar información para facilitar su comprensión en el curso.</li>
+                    <li class="fragment fade-in">Ejemplo: Simular llegadas de clientes a una tienda cada 10 minutos (λ = 0.1).</li>
+                </ul>
+                <img src="assets/tienda_clientes.jpg" alt="Imagen de una tienda con clientes y un cronómetro" style="width: 200px;">
+            </section>
+
+            <!-- Diapositiva 9: Población y Muestra -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Población y Muestra (Presentador 2)</h2>
+                <ul>
+                    <li class="fragment fade-in">Población: Eventos aleatorios modelados por la distribución exponencial (ej., fallos de equipos, llegadas).</li>
+                    <li class="fragment fade-in">Muestra: Datos generados en Excel con diferentes valores de λ (ej., 0.1, 0.5, 1).</li>
+                    <li class="fragment fade-in">Ventaja: Permite estudiar comportamientos sin datos reales.</li>
+                </ul>
+                <img src="assets/excel_tabla.jpg" alt="Tabla de Excel con datos simulados" style="width: 200px;">
+            </section>
+
+            <!-- Diapositiva 10: Instrumentos de Investigación -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Instrumentos de Investigación (Presentador 2)</h2>
+                <ul>
+                    <li class="fragment fade-in">Herramienta principal: Microsoft Excel para generar datos y gráficos.</li>
+                    <li class="fragment fade-in">Fuentes secundarias: Libros académicos (Devore, Ross) y recursos educativos en línea.</li>
+                    <li class="fragment fade-in">Ventaja de Excel: Fácil manejo de datos y visualización de distribuciones.</li>
+                </ul>
+                <img src="assets/excel_logo.jpg" alt="Logo de Excel y portadas de libros citados" style="width: 200px;">
+            </section>
+
+            <!-- Diapositiva 11: Tratamiento de Datos -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Tratamiento de Datos (Presentador 2)</h2>
+                <ol>
+                    <li class="fragment fade-in">Generar tiempos entre eventos en Excel.</li>
+                    <li class="fragment fade-in">Organizar en tablas para análisis.</li>
+                    <li class="fragment fade-in">Crear gráficos (histogramas, curvas de densidad) para comparar λ.</li>
+                    <li class="fragment fade-in">Conectar patrones observados con teoría y aplicaciones.</li>
+                </ol>
+                <img src="assets/excel_grafico2.jpg" alt="Ejemplo de tabla y gráfico de Excel" style="width: 200px;">
+            </section>
+
+            <!-- Diapositiva 12: Análisis Visual de Datos -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Análisis Visual de Datos (Presentador 2)</h2>
+                <ul>
+                    <li class="fragment fade-in">Generar histogramas para mostrar la frecuencia de tiempos entre eventos.</li>
+                    <li class="fragment fade-in">Curvas de densidad para visualizar la forma de la distribución exponencial.</li>
+                    <li class="fragment fade-in">Ejemplo: Comparar λ = 0.2 (eventos raros) vs. λ = 1 (eventos frecuentes).</li>
+                </ul>
+                <canvas id="expChart2" width="250" height="125"></canvas> <!-- Gráfico comparativo de curvas -->
+            </section>
+
+            <!-- Diapositiva 13: Marco Teórico - Fundamentos -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Marco Teórico - Fundamentos (Presentador 2)</h2>
+                <ul>
+                    <li class="fragment fade-in">Distribución exponencial: Modela el tiempo hasta un evento aleatorio.</li>
+                    <li class="fragment fade-in">Parámetro λ: Tasa de ocurrencia (eventos por unidad de tiempo).</li>
+                    <li class="fragment fade-in">Ejemplo: Si λ = 0.5, se esperan 0.5 eventos por hora (2 horas entre eventos).</li>
+                </ul>
+                <canvas id="expChart3" width="250" height="125"></canvas> <!-- Curva exponencial con λ anotado -->
+            </section>
+
+            <!-- Diapositiva 14: Propiedad Sin Memoria -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Propiedad Sin Memoria (Presentador 3)</h2>
+                <ul>
+                    <li class="fragment fade-in">Característica única: La probabilidad futura no depende del tiempo pasado.</li>
+                    <li class="fragment fade-in">Ejemplo: Una bombilla con 1000 horas de uso tiene la misma probabilidad de durar 100 horas más que una nueva.</li>
+                    <li class="fragment fade-in">Relevancia: Simplifica cálculos en fiabilidad.</li>
+                </ul>
+                <img src="assets/bombilla.jpg" alt="Imagen de una bombilla con un temporizador" style="width: 200px;">
+            </section>
+
+            <!-- Diapositiva 15: Propiedad Sin Memoria - Matemática -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Propiedad Sin Memoria - Matemática (Presentador 3)</h2>
+                <p class="fragment katex-animate" data-katex="P(T > t + s | T > t) = P(T > s)"></p>
+                <p class="fragment fade-in">T: Tiempo, t: Tiempo transcurrido, s: Tiempo adicional.</p>
+                <p class="fragment fade-in">Ejemplo: Si un servidor no falla en 10 días, la probabilidad de no fallar en 5 días más es la misma que desde el inicio.</p>
+                <canvas id="expChart3" width="250" height="125"></canvas> <!-- Gráfico de probabilidad -->
+            </section>
+
+            <!-- Diapositiva 16: Tasa de Riesgo Constante -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Tasa de Riesgo Constante (Presentador 3)</h2>
+                <ul>
+                    <li class="fragment fade-in">La probabilidad de un evento en un intervalo pequeño es constante.</li>
+                    <li class="fragment fade-in">Sin “desgaste” acumulativo, a diferencia de otros modelos.</li>
+                    <li class="fragment fade-in">Ejemplo: Un componente electrónico tiene la misma probabilidad de fallo en cualquier momento.</li>
+                </ul>
+                <img src="assets/componente.jpg" alt="Línea plana representando la tasa de riesgo constante" style="width: 200px;">
+            </section>
+
+            <!-- Diapositiva 17: Relación con Poisson -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Relación con Poisson (Presentador 3)</h2>
+                <ul>
+                    <li class="fragment fade-in">Poisson: Número de eventos en un intervalo fijo (ej., 3 fallos por hora).</li>
+                    <li class="fragment fade-in">Exponencial: Tiempo entre esos eventos (ej., 20 minutos entre fallos).</li>
+                    <li class="fragment fade-in">Conexión: Si los eventos son Poisson con tasa λ, los tiempos son exponenciales con λ.</li>
+                </ul>
+                <img src="assets/poisson_diagrama.jpg" alt="Diagrama comparativo Poisson vs. Exponencial" style="width: 200px;">
+            </section>
+
+            <!-- Diapositiva 18: Aplicaciones - Panorama General -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Aplicaciones - Panorama General (Presentador 3)</h2>
+                <ul>
+                    <li class="fragment fade-in">Áreas clave: Mantenimiento y fiabilidad (industria, electrónica).</li>
+                    <li class="fragment fade-in">Gestión de proyectos (construcción, TI).</li>
+                    <li class="fragment fade-in">Seguridad de redes (ciberseguridad).</li>
+                </ul>
+                <p class="fragment fade-in">Impacto: Reduce costos y optimiza planificación.</p>
+                <img src="assets/iconos_aplicaciones.jpg" alt="Iconos de una fábrica, un proyecto y un servidor" style="width: 200px;">
+            </section>
+
+            <!-- Diapositiva 19: Mantenimiento y Fiabilidad -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Mantenimiento y Fiabilidad (Presentador 3)</h2>
+                <ul>
+                    <li class="fragment fade-in">Modela tiempos entre fallos de equipos (ej., turbinas, servidores).</li>
+                    <li class="fragment fade-in">Ejemplo: Si un motor falla cada 5000 horas (λ = 1/5000), calcula la probabilidad de operar 6000 horas sin fallos.</li>
+                    <li class="fragment fade-in">Beneficio: Planifica mantenimientos preventivos, reduce paradas.</li>
+                </ul>
+                <img src="assets/maquina.jpg" alt="Imagen de una máquina industrial con un gráfico de fiabilidad" style="width: 200px;">
+            </section>
+
+            <!-- Diapositiva 20: Gestión de Proyectos -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Gestión de Proyectos (Presentador 4)</h2>
+                <ul>
+                    <li class="fragment fade-in">Modela tiempos entre retrasos inesperados (ej., problemas en obra).</li>
+                    <li class="fragment fade-in">Ejemplo: Si hay un contratiempo cada 20 días (λ = 0.05), calcula la probabilidad de 30 días sin problemas.</li>
+                    <li class="fragment fade-in">Beneficio: Mejora la planificación y reduce riesgos en plazos.</li>
+                </ul>
+                <img src="assets/cronograma.jpg" alt="Cronograma de proyecto con eventos aleatorios marcados" style="width: 200px;">
+            </section>
+
+            <!-- Diapositiva 21: Seguridad de Redes -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Seguridad de Redes (Presentador 4)</h2>
+                <ul>
+                    <li class="fragment fade-in">Modela tiempos entre fallos o ataques cibernéticos.</li>
+                    <li class="fragment fade-in">Ejemplo: Un servidor sufre ataques cada 15 días (λ = 1/15). Estima la probabilidad de 20 días sin ataques.</li>
+                    <li class="fragment fade-in">Beneficio: Optimiza estrategias de respaldo y prevención.</li>
+                </ul>
+                <img src="assets/servidor_candado.jpg" alt="Imagen de un servidor con un candado digital" style="width: 200px;">
+            </section>
+
+            <!-- Diapositiva 22: Ejemplo Práctico - Cálculo -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Ejemplo Práctico - Cálculo (Presentador 4)</h2>
+                <p class="fragment fade-in">Caso: Un call center recibe llamadas cada 10 minutos (λ = 0.1).</p>
+                <p class="fragment fade-in">Pregunta: ¿Cuál es la probabilidad de esperar más de 15 minutos por la próxima llamada?</p>
+                <p class="fragment katex-animate" data-katex="P(T > 15) = e^{-0.1 \cdot 15} \approx 0.223 (22.3\%)">Cálculo: 22.3%.</p>
+                <canvas id="dynamicChart" width="250" height="125"></canvas> <!-- Gráfico con área sombreada para T > 15 -->
+            </section>
+
+            <!-- Diapositiva 23: Visualización en Excel - Proceso -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Visualización en Excel - Proceso (Presentador 4)</h2>
+                <ul>
+                    <li class="fragment fade-in">Generar datos: Usar función =-(1/λ)*LN(ALEATORIO()) en Excel para simular tiempos.</li>
+                    <li class="fragment fade-in">Crear histogramas y curvas de densidad para λ = 0.1, 0.5, 1.</li>
+                    <li class="fragment fade-in">Comparar: λ mayor implica eventos más frecuentes, curva más empinada.</li>
+                </ul>
+                <img src="assets/excel_histograma.jpg" alt="Captura de pantalla de Excel con histograma y fórmula" style="width: 200px;">
+            </section>
+
+            <!-- Diapositiva 24: Visualización en Excel - Resultados -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Visualización en Excel - Resultados (Presentador 4)</h2>
+                <ul>
+                    <li class="fragment fade-in">Resultados: Histogramas muestran distribución sesgada a la derecha.</li>
+                    <li class="fragment fade-in">Curvas de densidad: f(x) = λe^(-λx), más pronunciada para λ grande.</li>
+                    <li class="fragment fade-in">Ejemplo: λ = 0.1 (eventos raros) vs. λ = 1 (eventos frecuentes).</li>
+                </ul>
+                <canvas id="expChart3" width="250" height="125"></canvas> <!-- Gráfico comparativo de histogramas -->
+            </section>
+
+            <!-- Diapositiva 25: Conclusión -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Conclusión (Todos los Presentadores)</h2>
+                <ul>
+                    <li class="fragment fade-in">La distribución exponencial es una herramienta poderosa para modelar eventos aleatorios.</li>
+                    <li class="fragment fade-in">Propiedades únicas: Sin memoria, tasa de riesgo constante.</li>
+                    <li class="fragment fade-in">Aplicaciones prácticas: Mantenimiento, proyectos, ciberseguridad.</li>
+                    <li class="fragment fade-in">Excel facilita la simulación y visualización de datos.</li>
+                </ul>
+                <img src="assets/collage_aplicaciones.jpg" alt="Collage de aplicaciones (máquina, proyecto, servidor)" style="width: 200px;">
+            </section>
+
+            <!-- Diapositiva 26: Referencias -->
+            <section>
+                <h2 class="animate__animated animate__bounceIn">Referencias (Todos los Presentadores)</h2>
+                <ul>
+                    <li class="fragment fade-in">Devore, J. L. (2016). Probability and Statistics for Engineering and the Sciences.</li>
+                    <li class="fragment fade-in">Hogg, R. V., et al. (2015). Probability and Statistical Inference.</li>
+                    <li class="fragment fade-in">Ross, S. M. (2019). Introduction to Probability Models.</li>
+                    <li class="fragment fade-in">Walpole, R. E., et al. (2017). Probability and Statistics for Engineers and Scientists.</li>
+                </ul>
+                <img src="assets/libros_academicos.jpg" alt="Portadas de los libros citados con un fondo académico" style="width: 200px;">
             </section>
         </div>
     </div>
+
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reveal.min.js"></script>
     <script src="mm1-simulation.js"></script>
     <script src="poisson-simulation.js"></script>
-    <script src="audio-effects.js"></script>
-    <script src="animations.js"></script>
-    <script src="script.js"></script>
+    <script src="audio-effects1.js"></script>
+    <script src="animations1.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>

@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializar Particles.js
     particlesJS('particles-js', {
         particles: {
             number: { value: 200, density: { enable: true, value_area: 800 } },
@@ -14,16 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Inicializar Reveal.js
     Reveal.initialize({
         hash: true,
         transition: 'cube',
         keyboard: {
-            69: () => { Reveal.slide(25); playEasterSound(); }
+            69: () => { Reveal.slide(26); playEasterSound(); }
         }
     });
 
-    // Renderizar fórmulas KaTeX
     document.querySelectorAll('.katex-animate').forEach(element => {
         katex.render(element.getAttribute('data-katex'), element, { displayMode: true });
     });
@@ -47,14 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
         options: {
             responsive: true,
             animation: { duration: 2000, easing: 'easeOutBounce' },
-            scales: {
-                x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0' } },
-                y: { title: { display: true, text: 'f(x)', color: '#e0e0e0' } }
-            }
+            scales: { x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0' } }, y: { title: { display: true, text: 'f(x)', color: '#e0e0e0' } } }
         }
     });
 
-    // Gráfico 2 (λ = 0.5 y λ = 2)
+    // Gráfico 2 (λ = 0.2 vs λ = 1)
     const ctx2 = document.getElementById('expChart2').getContext('2d');
     new Chart(ctx2, {
         type: 'line',
@@ -62,8 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
             labels: Array.from({ length: 50 }, (_, i) => (i / 10).toFixed(1)),
             datasets: [
                 {
-                    label: 'PDF (λ = 0.5)',
-                    data: Array.from({ length: 50 }, (_, i) => 0.5 * Math.exp(-0.5 * (i / 10))),
+                    label: 'PDF (λ = 0.2)',
+                    data: Array.from({ length: 50 }, (_, i) => 0.2 * Math.exp(-0.2 * (i / 10))),
                     borderColor: '#00f2ff',
                     backgroundColor: 'rgba(0, 242, 255, 0.4)',
                     fill: true,
@@ -71,8 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     borderWidth: 3
                 },
                 {
-                    label: 'PDF (λ = 2)',
-                    data: Array.from({ length: 50 }, (_, i) => 2 * Math.exp(-2 * (i / 10))),
+                    label: 'PDF (λ = 1)',
+                    data: Array.from({ length: 50 }, (_, i) => Math.exp(-1 * (i / 10))),
                     borderColor: '#ff00ff',
                     backgroundColor: 'rgba(255, 0, 255, 0.4)',
                     fill: true,
@@ -84,22 +78,19 @@ document.addEventListener('DOMContentLoaded', () => {
         options: {
             responsive: true,
             animation: { duration: 2000, easing: 'easeOutBounce' },
-            scales: {
-                x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0' } },
-                y: { title: { display: true, text: 'f(x)', color: '#e0e0e0' } }
-            }
+            scales: { x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0' } }, y: { title: { display: true, text: 'f(x)', color: '#e0e0e0' } } }
         }
     });
 
-    // Gráfico 3 (λ = 1.5)
+    // Gráfico 3 (λ = 0.001)
     const ctx3 = document.getElementById('expChart3').getContext('2d');
     new Chart(ctx3, {
         type: 'line',
         data: {
             labels: Array.from({ length: 50 }, (_, i) => (i / 10).toFixed(1)),
             datasets: [{
-                label: 'PDF (λ = 1.5)',
-                data: Array.from({ length: 50 }, (_, i) => 1.5 * Math.exp(-1.5 * (i / 10))),
+                label: 'PDF (λ = 0.001)',
+                data: Array.from({ length: 50 }, (_, i) => 0.001 * Math.exp(-0.001 * (i / 10))),
                 borderColor: '#00ff9f',
                 backgroundColor: 'rgba(0, 255, 159, 0.4)',
                 fill: true,
@@ -110,23 +101,20 @@ document.addEventListener('DOMContentLoaded', () => {
         options: {
             responsive: true,
             animation: { duration: 2000, easing: 'easeOutBounce' },
-            scales: {
-                x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0' } },
-                y: { title: { display: true, text: 'f(x)', color: '#e0e0e0' } }
-            }
+            scales: { x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0' } }, y: { title: { display: true, text: 'f(x)', color: '#e0e0e0' } } }
         }
     });
 
-    // Gráfico Interactivo (Diapositiva 18)
+    // Gráfico Interactivo
     let dynamicChart;
     const ctxDynamic = document.getElementById('dynamicChart').getContext('2d');
     function updateChart() {
-        const lambda = parseFloat(document.getElementById('lambdaSlider').value);
+        const lambda = parseFloat(document.getElementById('lambdaSlider').value || 0.2);
         dynamicChart.data.datasets[0].data = Array.from({ length: 50 }, (_, i) => lambda * Math.exp(-lambda * (i / 10)));
-        dynamicChart.data.datasets[0].label = `PDF (λ = ${lambda})`;
+        dynamicChart.data.datasets[0].label = `PDF (λ = ${lambda.toFixed(2)})`;
         dynamicChart.update();
         const explanation = document.getElementById('lambdaExplanation');
-        explanation.textContent = `λ = ${lambda}: Media = ${1/lambda.toFixed(2)} min. ${lambda < 1 ? 'Eventos lentos, curva suave.' : 'Eventos rápidos, decaimiento fuerte!'}`;
+        explanation.textContent = `λ = ${lambda.toFixed(2)}: Media = ${(1/lambda).toFixed(2)} min. ${lambda < 0.5 ? 'Eventos lentos.' : 'Eventos rápidos!'}`;
         explanation.classList.add('animate__animated', 'animate__fadeIn');
         setTimeout(() => explanation.classList.remove('animate__animated', 'animate__fadeIn'), 600);
     }
@@ -135,8 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
         data: {
             labels: Array.from({ length: 50 }, (_, i) => (i / 10).toFixed(1)),
             datasets: [{
-                label: 'PDF (λ = 1)',
-                data: Array.from({ length: 50 }, (_, i) => Math.exp(-1 * (i / 10))),
+                label: 'PDF (λ = 0.2)',
+                data: Array.from({ length: 50 }, (_, i) => 0.2 * Math.exp(-0.2 * (i / 10))),
                 borderColor: '#ff4d4d',
                 backgroundColor: 'rgba(255, 77, 77, 0.4)',
                 fill: true,
@@ -147,15 +135,12 @@ document.addEventListener('DOMContentLoaded', () => {
         options: {
             responsive: true,
             animation: { duration: 2000, easing: 'easeOutBounce' },
-            scales: {
-                x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0' } },
-                y: { title: { display: true, text: 'f(x)', color: '#e0e0e0' } }
-            }
+            scales: { x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0' } }, y: { title: { display: true, text: 'f(x)', color: '#e0e0e0' } } }
         }
     });
     window.updateChart = updateChart;
 
-    // Gráfico del Mini-Juego (Diapositiva 19)
+    // Gráfico del Mini-Juego
     const ctxGame = document.getElementById('gameChart').getContext('2d');
     new Chart(ctxGame, {
         type: 'line',
@@ -163,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             labels: Array.from({ length: 50 }, (_, i) => (i / 10).toFixed(1)),
             datasets: [{
                 label: 'PDF (Adivina λ)',
-                data: Array.from({ length: 50 }, (_, i) => 1.5 * Math.exp(-1.5 * (i / 10))),
+                data: Array.from({ length: 50 }, (_, i) => 0.1 * Math.exp(-0.1 * (i / 10))),
                 borderColor: '#ff00ff',
                 backgroundColor: 'rgba(255, 0, 255, 0.4)',
                 fill: true,
@@ -174,14 +159,10 @@ document.addEventListener('DOMContentLoaded', () => {
         options: {
             responsive: true,
             animation: { duration: 2000, easing: 'easeOutBounce' },
-            scales: {
-                x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0' } },
-                y: { title: { display: true, text: 'f(x)', color: '#e0e0e0' } }
-            }
+            scales: { x: { title: { display: true, text: 'Tiempo (x)', color: '#e0e0e0' } }, y: { title: { display: true, text: 'f(x)', color: '#e0e0e0' } } }
         }
     });
 
-    // Mini-juego
     window.showAnswer = function() {
         const answer = document.querySelector('.answer');
         answer.style.display = 'block';
@@ -190,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
         playSuccessSound();
     };
 
-    // Lanzar confeti
     window.launchConfetti = function() {
         confetti({
             particleCount: 250,

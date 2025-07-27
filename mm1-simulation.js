@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(animate);
         TWEEN.update();
         renderer.render(scene, camera);
-        if (Math.random() < 0.02) addCustomer(); // Tasa de llegada
+        if (Math.random() < 0.02) addCustomer();
     }
 
     animate();

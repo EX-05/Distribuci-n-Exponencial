@@ -15,16 +15,16 @@ body {
 
 /* Animación de tiempo */
 .time-animation {
-    width: 400px;
-    height: 200px;
+    width: 250px;
+    height: 125px;
     background: linear-gradient(90deg, #00f2ff, #ff00ff);
-    border-radius: 15px;
-    animation: pulse 2s infinite;
+    border-radius: 8px;
+    animation: pulse 1.5s infinite;
 }
 
 @keyframes pulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.1); box-shadow: 0 0 20px #00f2ff; }
+    50% { transform: scale(1.03); box-shadow: 0 0 10px #00f2ff; }
     100% { transform: scale(1); }
 }
 
@@ -32,94 +32,98 @@ body {
 .reveal h1, .reveal h2 {
     font-family: 'Orbitron', sans-serif;
     color: #00f2ff;
-    text-shadow: 0 0 20px rgba(0, 242, 255, 0.9), 0 0 10px rgba(0, 242, 255, 0.6);
+    text-shadow: 0 0 10px rgba(0, 242, 255, 0.5), 0 0 3px rgba(0, 242, 255, 0.3);
+    font-size: 1.3em;
 }
 
 /* Texto */
 .reveal p, .reveal li {
     color: #e0e0e0;
-    font-size: 1.2em;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    font-size: 0.9em;
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
 /* Fórmulas KaTeX */
 .katex {
     font-family: 'Fira Code', monospace;
-    font-size: 1.3em;
+    font-size: 1em;
     color: #00ff9f;
-    text-shadow: 0 0 10px rgba(0, 255, 159, 0.7);
+    text-shadow: 0 0 3px rgba(0, 255, 159, 0.4);
 }
 
 /* Animación de fórmulas */
 .katex-animate {
     opacity: 0;
-    animation: writeFormula 1.2s forwards;
+    animation: writeFormula 0.8s forwards;
 }
 
 @keyframes writeFormula {
-    0% { opacity: 0; transform: translateY(30px) scale(0.8); }
+    0% { opacity: 0; transform: translateY(15px) scale(0.95); }
     100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 /* Gráficos */
 .reveal canvas {
-    border: 3px solid #00f2ff;
-    border-radius: 15px;
-    box-shadow: 0 0 25px rgba(0, 242, 255, 0.7), inset 0 0 10px rgba(0, 242, 255, 0.3);
+    border: 1px solid #00f2ff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.3), inset 0 0 3px rgba(0, 242, 255, 0.1);
+    max-width: 100%;
+    height: auto;
 }
 
 /* Botones y sliders */
 .reveal button, .reveal input[type="range"] {
     background: linear-gradient(45deg, #00f2ff, #ff00ff);
     color: #1a1a2e;
-    padding: 12px 25px;
+    padding: 6px 12px;
     border: none;
-    border-radius: 10px;
+    border-radius: 6px;
     cursor: pointer;
     font-family: 'Orbitron', sans-serif;
-    transition: all 0.4s ease;
-    box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+    transition: all 0.2s ease;
+    box-shadow: 0 0 5px rgba(0, 242, 255, 0.2);
+    font-size: 0.8em;
 }
 
 .reveal button:hover, .reveal input[type="range"]:hover {
     background: linear-gradient(45deg, #ff00ff, #00ff9f);
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+    transform: scale(1.02);
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
 }
 
 /* Imágenes */
 .reveal img {
-    border-radius: 15px;
-    max-width: 100%;
-    box-shadow: 0 0 20px rgba(255, 0, 255, 0.6), inset 0 0 10px rgba(255, 0, 255, 0.3);
-    animation: float 3s infinite;
+    border-radius: 8px;
+    max-width: 200px;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3), inset 0 0 3px rgba(255, 0, 255, 0.1);
+    animation: float 1.5s infinite;
 }
 
 @keyframes float {
     0% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-3px); }
     100% { transform: translateY(0); }
 }
 
 /* Explicación del slider */
 #lambdaExplanation {
-    font-size: 1em;
+    font-size: 0.8em;
     color: #00ff9f;
-    margin-top: 15px;
-    animation: fadeInGlow 0.6s;
-    text-shadow: 0 0 10px rgba(0, 255, 159, 0.8);
+    margin-top: 8px;
+    animation: fadeInGlow 0.4s;
+    text-shadow: 0 0 3px rgba(0, 255, 159, 0.4);
 }
 
 @keyframes fadeInGlow {
     0% { opacity: 0; text-shadow: 0 0 0px rgba(0, 255, 159, 0); }
-    100% { opacity: 1; text-shadow: 0 0 10px rgba(0, 255, 159, 0.8); }
+    100% { opacity: 1; text-shadow: 0 0 3px rgba(0, 255, 159, 0.4); }
 }
 
 /* Simulación 3D */
 #mm1Sim {
-    width: 400px;
-    height: 200px;
-    border: 3px solid #ff00ff;
-    border-radius: 15px;
-    box-shadow: 0 0 25px rgba(255, 0, 255, 0.7);
+    width: 250px;
+    height: 125px;
+    border: 1px solid #ff00ff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
 }
