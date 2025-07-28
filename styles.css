@@ -1,9 +1,9 @@
 /* Estilo general */
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    background: linear-gradient(135deg, #080812, #121a2f); /* Darker gradient: near-black navy to dark blue-gray */
     overflow: hidden;
-    font-size: 1.1em; /* Increased base font size for 90% zoom */
+    font-size: 1.1em; /* Maintained for 90% zoom */
 }
 
 /* Fondo de partículas */
@@ -18,38 +18,38 @@ body {
 .time-animation {
     width: 20vw; /* Relative units */
     height: 10vw;
-    background: linear-gradient(90deg, #00f2ff, #ff00ff);
+    background: linear-gradient(90deg, #00d4ff, #ff007a); /* Consistent with previous */
     border-radius: 8px;
     animation: pulse 1.5s infinite;
 }
 
 @keyframes pulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.03); box-shadow: 0 0 10px #00f2ff; }
+    50% { transform: scale(1.03); box-shadow: 0 0 10px #00d4ff; }
     100% { transform: scale(1); }
 }
 
 /* Títulos */
 .reveal h1, .reveal h2 {
     font-family: 'Orbitron', sans-serif;
-    color: #00f2ff;
-    text-shadow: 0 0 10px rgba(0, 242, 255, 0.5), 0 0 3px rgba(0, 242, 255, 0.3);
-    font-size: 1.5em; /* Increased for zoom */
+    color: #00e6ff; /* Bright cyan for contrast */
+    text-shadow: 0 0 8px rgba(0, 230, 255, 0.6), 0 0 4px rgba(0, 230, 255, 0.4);
+    font-size: 1.5em; /* Maintained for zoom */
 }
 
 /* Texto */
 .reveal p, .reveal li {
-    color: #e0e0e0;
-    font-size: 1em; /* Increased for zoom */
-    text-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
+    color: #f5f5fa; /* Slightly brighter white-gray for readability */
+    font-size: 1em; /* Maintained for zoom */
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
 }
 
 /* Fórmulas KaTeX */
 .katex {
     font-family: 'Fira Code', monospace;
-    font-size: 1.1em; /* Increased for zoom */
-    color: #00ff9f;
-    text-shadow: 0 0 3px rgba(0, 255, 159, 0.4);
+    font-size: 1.1em; /* Maintained for zoom */
+    color: #00ffaa; /* Bright green for visibility */
+    text-shadow: 0 0 4px rgba(0, 255, 170, 0.5);
 }
 
 /* Animación de fórmulas */
@@ -65,25 +65,25 @@ body {
 
 /* Gráficos */
 .reveal canvas {
-    border: 1px solid #00f2ff;
+    border: 1px solid #00e6ff; /* Bright cyan border */
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 242, 255, 0.3), inset 0 0 3px rgba(0, 242, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 230, 255, 0.4), inset 0 0 3px rgba(0, 230, 255, 0.2);
     max-width: 90%; /* Responsive width */
     height: auto;
 }
 
 /* Botones y sliders */
 .reveal button, .reveal input[type="range"] {
-    background: linear-gradient(45deg, #00f2ff, #ff00ff);
-    color: #1a1a2e;
+    background: linear-gradient(45deg, #00e6ff, #ff007a); /* Consistent with previous */
+    color: #080812; /* Matching darker background for button text */
     padding: 8px 14px; /* Slightly larger */
     border: none;
     border-radius: 6px;
     cursor: pointer;
     font-family: 'Orbitron', sans-serif;
     transition: all 0.2s ease;
-    box-shadow: 0 0 5px rgba(0, 242, 255, 0.2);
-    font-size: 0.9em; /* Increased for zoom */
+    box-shadow: 0 0 5px rgba(0, 230, 255, 0.3);
+    font-size: 0.9em; /* Maintained for zoom */
 }
 
 /* Imágenes */
@@ -91,7 +91,7 @@ body {
     border-radius: 8px;
     max-width: 20vw; /* Relative units */
     max-height: 20vh;
-    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3), inset 0 0 3px rgba(255, 0, 255, 0.1);
+    box-shadow: 0 0 10px rgba(255, 0, 122, 0.4), inset 0 0 3px rgba(255, 0, 122, 0.2);
     animation: float 1.5s infinite;
 }
 
@@ -103,25 +103,25 @@ body {
 
 /* Explicación del slider */
 #lambdaExplanation {
-    font-size: 0.9em; /* Increased for zoom */
-    color: #00ff9f;
+    font-size: 0.9em; /* Maintained for zoom */
+    color: #00ffaa; /* Bright green for visibility */
     margin-top: 8px;
     animation: fadeInGlow 0.4s;
-    text-shadow: 0 0 3px rgba(0, 255, 159, 0.4);
+    text-shadow: 0 0 4px rgba(0, 255, 170, 0.5);
 }
 
 @keyframes fadeInGlow {
-    0% { opacity: 0; text-shadow: 0 0 0px rgba(0, 255, 159, 0); }
-    100% { opacity: 1; text-shadow: 0 0 3px rgba(0, 255, 159, 0.4); }
+    0% { opacity: 0; text-shadow: 0 0 0px rgba(0, 255, 170, 0); }
+    100% { opacity: 1; text-shadow: 0 0 4px rgba(0, 255, 170, 0.5); }
 }
 
 /* Simulación 3D */
 #mm1Sim {
     width: 20vw; /* Relative units */
     height: 10vw;
-    border: 1px solid #ff00ff;
+    border: 1px solid #ff007a; /* Matching button gradient */
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+    box-shadow: 0 0 10px rgba(255, 0, 122, 0.4);
 }
 
 /* Media query for smaller screens or zoomed views */

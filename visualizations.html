@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizaciones - Distribución Exponencial</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { background: linear-gradient(135deg, #0a0e2e, #1a4060); color: #e0e0e0; font-family: 'Orbitron', sans-serif; margin: 0; padding: 20px; }
+        canvas { border: 2px solid #00ff9f; border-radius: 5px; background: rgba(10, 14, 46, 0.8); margin: 20px 0; width: 100%; max-width: 800px; height: auto; }
+        table { border-collapse: collapse; margin: 20px 0; width: 100%; max-width: 800px; background: rgba(10, 14, 46, 0.8); }
+        th, td { border: 1px solid #00ff9f; padding: 10px; text-align: center; color: #e0e0e0; }
+        th { background: #1a4060; font-weight: bold; }
+        h2, h3 { color: #00f2ff; text-shadow: 0 0 10px #00f2ff; }
+        button { background: #00f2ff; color: #0a0e2e; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: all 0.3s; }
+        button:hover { transform: scale(1.1); box-shadow: 0 0 15px #00f2ff; }
+    </style>
+</head>
+<body>
+    <h2>Visualizaciones de la Distribución Exponencial</h2>
+
+    <h3>Curva Exponencial (λ = 0.5)</h3>
+    <canvas id="expCurve"></canvas>
+
+    <h3>Gráfico de Densidad (λ = 0.5)</h3>
+    <canvas id="densityChart"></canvas>
+
+    <h3>Tabla de Muestra (Tiempos Simulados)</h3>
+    <table id="sampleTable">
+        <tr><th>λ</th><th>Tiempo (min)</th></tr>
+    </table>
+    <button onclick="generateSampleData()">Generar Datos</button>
+
+    <h3>Comparación de λ (0.2 vs 1)</h3>
+    <canvas id="compareChart"></canvas>
+
+    <script>
+        // Chart Initialization
+        const expCurve = new Chart(document.getElementById('expCurve').getContext('2d'), {
+            type: 'line',
+            data: { labels: Array(50).fill().map((_, i) => i/10), datasets: [{ label: 'Curva Exponencial', data: Array(50).fill().map((_, i) => Math.exp(-0.5 * (i/10))), borderColor: '#00ff9f', backgroundColor: 'rgba(0, 255, 159, 0.3)', fill: true, pointRadius: 5, pointHoverRadius: 10 }] },
+            options: { responsive: true, scales: { x: { title: { display: true, text: 'Tiempo', color: '#e0e0e0' } }, y: { title: { display: true, text: 'Probabilidad', color: '#e0e0e0' } } } }
+        });
+
+        const densityChart = new Chart(document.getElementById('densityChart').getContext('2d'), {
+            type: 'line',
+            data: { labels: Array(50).fill().map((_, i) => i/10), datasets: [{ label: 'Densidad (λ = 0.5)', data: Array(50).fill().map((_, i) => 0.5 * Math.exp(-0.5 * (i/10))), borderColor: '#ff00ff', backgroundColor: 'rgba(255, 0, 255, 0.3)', fill: true }] },
+            options: { responsive: true, scales: { x: { title: { display: true, text: 'Tiempo', color: '#e0e0e0' } }, y: { title: { display: true, text: 'f(x)', color: '#e0e0e0' } } } }
+        });
+
+        const compareChart = new Chart(document.getElementById('compareChart').getContext('2d'), {
+            type: 'line',
+            data: { labels: Array(50).fill().map((_, i) => i/10), datasets: [
+                { label: 'λ = 0.2', data: Array(50).fill().map((_, i) => 0.2 * Math.exp(-0.2 * (i/10))), borderColor: '#00f2ff', backgroundColor: 'rgba(0, 242, 255, 0.3)', fill: true },
+                { label: 'λ = 1', data: Array(50).fill().map((_, i) => Math.exp(-1 * (i/10))), borderColor: '#ff00ff', backgroundColor: 'rgba(255, 0, 255, 0.3)', fill: true }
+            ] },
+            options: { responsive: true, scales: { x: { title: { display: true, text: 'Tiempo', color: '#e0e0e0' } }, y: { title: { display: true, text: 'f(x)', color: '#e0e0e0' } } } }
+        });
+
+        function generateSampleData() {
+            const table = document.getElementById('sampleTable');
+            table.innerHTML = '<tr><th>λ</th><th>Tiempo (min)</th></tr>' + [0.1, 0.5, 1].map(l => `<tr><td>${l}</td><td>${(-1/l * Math.log(Math.random())).toFixed(1)}</td></tr>`).join('');
+        }
+        generateSampleData();
+    </script>
+</body>
+</html> 
