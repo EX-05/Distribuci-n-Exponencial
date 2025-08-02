@@ -5,15 +5,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     Reveal.on('ready', (event) => {
         window.showModal = function(modalId) { 
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Evita scroll de fondo
             const modal = document.getElementById(modalId); 
             if (modal) { 
-                modal.style.display = 'block'; 
                 setTimeout(() => initializeChart(modalId.replace('Modal', '')), 100);
             } 
         };
         window.closeModal = function(modalId) { 
             const modal = document.getElementById(modalId); 
-            if (modal) modal.style.display = 'none'; 
+            if (modal) {
+                modal.style.display = 'none'; 
+                document.body.style.overflow = ''; // Restaura scroll
+            }
         };
 
         function initializeChart(chartId) {
@@ -243,3 +247,23 @@ function renderAllKatex() {
 }
 document.addEventListener('DOMContentLoaded', renderAllKatex);
 if (window.Reveal) Reveal.on('slidechanged', renderAllKatex);
+
+// Ejemplo para Chart.js
+const chartOptions = {
+  plugins: {
+    legend: {
+      labels: { font: { size: 16 }, color: '#00e6ff' }
+    }
+  },
+  scales: {
+    x: {
+      ticks: { font: { size: 16 }, color: '#fff' },
+      title: { display: true, text: 'Tiempo', font: { size: 18 }, color: '#00e6ff' }
+    },
+    y: {
+      ticks: { font: { size: 16 }, color: '#fff' },
+      title: { display: true, text: 'Densidad', font: { size: 18 }, color: '#00e6ff' }
+    }
+  }
+};
+// Usa chartOptions en todos tus gráficos Chart.js

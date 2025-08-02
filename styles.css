@@ -80,17 +80,36 @@ body {
 }
 
 /* 6. Modals y gráficos grandes */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(24, 24, 40, 0.96);
+    overflow-y: auto;
+}
 .modal-content {
-    max-width: 95vw;
-    width: 95vw;
-    margin: 2vh auto;
+    position: relative;
+    margin: 4vh auto;
     padding: 2vh 2vw;
     border-radius: 18px;
     background: #23233a;
     box-shadow: 0 2px 24px #000a;
+    max-width: 95vw;
+    width: 95vw;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.close {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    font-size: 2em;
+    color: #00e6ff;
+    cursor: pointer;
+    z-index: 10;
 }
 
 /* 7. Gráficos ocupando toda la pantalla y legibles */
@@ -137,26 +156,29 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2em;
+    gap: 1em;
     margin-top: 1em;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .fuente-libro {
-    flex: 1 1 180px;
-    max-width: 180px;
+    flex: 1 1 110px;
+    max-width: 110px;
     text-align: center;
 }
 .fuente-libro img {
     width: 100%;
-    max-width: 140px;
-    margin: 0 auto 0.5em auto;
+    max-width: 80px;
+    margin: 0 auto 0.3em auto;
     display: block;
     border-radius: 8px;
-    box-shadow: 0 0 8px #00e6ff44;
+    box-shadow: 0 0 6px #00e6ff44;
 }
 .fuente-libro h3 {
-    font-size: 1em;
+    font-size: 0.85em;
     color: #fff;
-    margin: 0.3em 0 0 0;
+    margin: 0.2em 0 0 0;
 }
 
 /* 10. Responsividad en móviles */
@@ -170,6 +192,9 @@ body {
         padding: 2vw 2vw;
         align-items: center;
         justify-content: center;
+    }
+    .fuentes-libros {
+        max-width: 99vw;
     }
     .responsive-video {
         max-width: 99vw;
@@ -187,4 +212,25 @@ body {
 ::-webkit-scrollbar-thumb {
     background: #00e6ff88;
     border-radius: 8px;
+}
+.videos-scroll {
+    max-height: 60vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5em;
+    width: 100%;
+    padding-bottom: 1em;
+}
+.responsive-video {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 0 12px #00e6ff44;
+    margin-bottom: 0.5em;
+}
+.item {
+    width: 100%;
+    text-align: center;
 }

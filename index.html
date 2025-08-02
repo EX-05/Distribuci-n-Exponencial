@@ -29,8 +29,10 @@
                     <p>Probabilidad y Estadística &mdash; Prof. Herny Barrantes</p>
                 </div>
                 <h2 class="gancho">¿Cuánto tiempo hasta la próxima notificación?<br><span style="color:#ffd700;">¡La exponencial lo descubre!</span></h2>
+                <p style="margin-top:1em;">La distribución exponencial es clave para entender procesos aleatorios y tiempos de espera en la vida real.</p>
                 <button class="action-btn" onclick="showModal('motivationModal')">Ver Curva</button>
             </section>
+
             <!-- Motivación -->
             <section data-transition="cube">
                 <h2>¿Por Qué Nos Apasiona?</h2>
@@ -39,6 +41,8 @@
                     <li>Relevancia: Fallos de máquinas, llegadas de clientes.</li>
                     <li>Ejemplo: Tiempo hasta el próximo pasajero.</li>
                     <li>Dato: 65% de modelos de fiabilidad (Walpole, 2017).</li>
+                    <li>Aplicaciones en telecomunicaciones, salud, industria y más.</li>
+                    <li>Permite tomar mejores decisiones bajo incertidumbre.</li>
                 </ul>
             </section>
             <!-- Mapa -->
@@ -52,6 +56,7 @@
                     <tr><td>Datos: Visualización en Excel.</td></tr>
                     <tr><td>Cierre: Resumen y fuentes.</td></tr>
                 </table>
+                <p>¡Prepárate para una aventura estadística que conecta teoría y práctica!</p>
             </section>
             <!-- Metas -->
             <section data-transition="cube">
@@ -60,28 +65,45 @@
                     <li>Propiedades: sin memoria, riesgo constante.</li>
                     <li>Rol en eventos aleatorios (ej., pedidos en restaurante).</li>
                     <li>Ejemplo: Esperar &gt;12 min con media 8 min.</li>
+                    <li>Optimización de procesos y recursos.</li>
+                    <li>Simulación de sistemas reales para análisis y mejora.</li>
                 </ul>
                 <button class="action-btn" onclick="showModal('simulationModal')">Simular</button>
             </section>
             <!-- Teoría y Fórmulas -->
             <section data-transition="cube">
                 <h2>Fórmulas Clave</h2>
-                <div class="formula-container">
-                    <span class="katex-formula" data-formula="f(x) = \lambda e^{-\lambda x}, \quad x \geq 0"></span>
-                    <p class="formula-text">Función de densidad de probabilidad.</p>
-                </div>
-                <div class="formula-container">
-                    <span class="katex-formula" data-formula="P(T > t) = e^{-\lambda t}, \quad t \geq 0"></span>
-                    <p class="formula-text">Probabilidad de esperar más de <b>t</b>.</p>
-                </div>
-                <div class="formula-container">
-                    <span class="katex-formula" data-formula="P(T > t + s \mid T > t) = P(T > s), \quad s, t \geq 0"></span>
-                    <p class="formula-text">Propiedad de memoria nula.</p>
-                </div>
-                <div class="formula-container">
-                    <span class="katex-formula" data-formula="P(N(t) = n) = \frac{(\lambda t)^n e^{-\lambda t}}{n!}, \quad n = 0, 1, 2, \ldots"></span>
-                    <p class="formula-text">Distribución de Poisson relacionada.</p>
-                </div>
+                <!-- Fórmula 1 -->
+                <section data-transition="cube">
+                    <h2>Fórmula Clave: Densidad</h2>
+                    <div class="formula-container">
+                        <span class="katex-formula" data-formula="f(x) = \lambda e^{-\lambda x}, \quad x \geq 0"></span>
+                        <p class="formula-text">La función de densidad de probabilidad describe la probabilidad de esperar exactamente un tiempo <b>x</b> antes del siguiente evento.</p>
+                        <p>Ejemplo: ¿Cuál es la probabilidad de esperar exactamente 5 minutos?</p>
+                    </div>
+                </section>
+
+                <!-- Fórmula 2 -->
+                <section data-transition="cube">
+                    <h2>Fórmula Clave: Espera</h2>
+                    <div class="formula-container">
+                        <span class="katex-formula" data-formula="P(T > t) = e^{-\lambda t}, \quad t \geq 0"></span>
+                        <p class="formula-text">La probabilidad de esperar más de <b>t</b> minutos antes del próximo evento.</p>
+                        <p>Ejemplo: ¿Qué probabilidad hay de que el próximo cliente tarde más de 10 minutos?</p>
+                    </div>
+                </section>
+
+                <!-- Fórmula 3 -->
+                <section data-transition="cube">
+                    <h2>Fórmula Clave: Poisson y Memoria Nula</h2>
+                    <div class="formula-container">
+                        <span class="katex-formula" data-formula="P(T > t + s \mid T > t) = P(T > s), \quad s, t \geq 0"></span>
+                        <p class="formula-text">La propiedad de memoria nula: el futuro es independiente del pasado.</p>
+                        <span class="katex-formula" data-formula="P(N(t) = n) = \frac{(\lambda t)^n e^{-\lambda t}}{n!}, \quad n = 0, 1, 2, \ldots"></span>
+                        <p class="formula-text">La distribución de Poisson describe el número de eventos en un intervalo de tiempo.</p>
+                        <p>Ejemplo: ¿Cuántos clientes llegan en 1 hora?</p>
+                    </div>
+                </section>
             </section>
             <!-- Visualización -->
             <section data-transition="cube">
@@ -89,9 +111,11 @@
                 <div class="content-box">
                     <p>Histogramas y curvas para diferentes tasas.</p>
                     <p>¡Interactúa con los sliders y observa los cambios!</p>
+                    <p>¿Qué sucede si la tasa aumenta o disminuye? ¡Descúbrelo en tiempo real!</p>
                 </div>
-                <button class="action-btn" onclick="showModal('excelChartModal')">Ver Gráfico</button>
+                <button class="action-btn" onclick="showModal('excelChartModal')">Ver Gráfico Excel</button>
             </section>
+
             <!-- Patrones -->
             <section data-transition="cube">
                 <h2>Patrones Visuales</h2>
@@ -99,35 +123,58 @@
                     <p>Resultados: Distribución sesgada.</p>
                     <p>Curvas: Tasa alta = más empinadas.</p>
                     <p>Comparación: Tasa baja vs. alta.</p>
+                    <p>¿Por qué la forma de la curva importa en la toma de decisiones?</p>
                 </div>
                 <button class="action-btn" onclick="showModal('patternModal')">Comparar Tasas</button>
             </section>
+
             <!-- Videos -->
             <section data-transition="cube">
                 <h2>Videos Explicativos</h2>
-                <div class="videos-scroll">
-                    <div class="item">
-                        <video controls class="responsive-video">
-                            <source src="Introduccion.mp4" type="video/mp4">
-                            Tu navegador no soporta el video.
-                        </video>
-                        <h3>Introducción y Ejemplos</h3>
+                <!-- Video 1 -->
+                <section data-transition="cube">
+                    <h2>Video: Introducción y Ejemplos</h2>
+                    <div class="videos-scroll">
+                        <div class="item">
+                            <video controls class="responsive-video">
+                                <source src="Introduccion.mp4" type="video/mp4">
+                                Tu navegador no soporta el video.
+                            </video>
+                            <h3>Introducción y Ejemplos</h3>
+                        </div>
                     </div>
-                    <div class="item">
-                        <video controls class="responsive-video">
-                            <source src="Simulacion.mp4" type="video/mp4">
-                            Tu navegador no soporta el video.
-                        </video>
-                        <h3>Simulación</h3>
+                    <p>Descubre cómo la exponencial aparece en situaciones cotidianas y por qué es tan útil.</p>
+                </section>
+
+                <!-- Video 2 -->
+                <section data-transition="cube">
+                    <h2>Video: Simulación</h2>
+                    <div class="videos-scroll">
+                        <div class="item">
+                            <video controls class="responsive-video">
+                                <source src="Simulacion.mp4" type="video/mp4">
+                                Tu navegador no soporta el video.
+                            </video>
+                            <h3>Simulación</h3>
+                        </div>
                     </div>
-                    <div class="item">
-                        <video controls class="responsive-video">
-                            <source src="Distribuciongeneral.mp4" type="video/mp4">
-                            Tu navegador no soporta el video.
-                        </video>
-                        <h3>Distribución General</h3>
+                    <p>Observa cómo simulamos tiempos de espera y analizamos resultados reales.</p>
+                </section>
+
+                <!-- Video 3 -->
+                <section data-transition="cube">
+                    <h2>Video: Distribución General</h2>
+                    <div class="videos-scroll">
+                        <div class="item">
+                            <video controls class="responsive-video">
+                                <source src="Distribuciongeneral.mp4" type="video/mp4">
+                                Tu navegador no soporta el video.
+                            </video>
+                            <h3>Distribución General</h3>
+                        </div>
                     </div>
-                </div>
+                    <p>Explora la relación entre la exponencial y otras distribuciones como la Poisson.</p>
+                </section>
             </section>
             <!-- Libros y Fuentes juntos y centrados -->
             <section data-transition="cube">
@@ -157,8 +204,9 @@
                 <div class="content-box">
                     <p>Predice eventos aleatorios.</p>
                     <p>Propiedades: Sin memoria, riesgo constante.</p>
-                    <p>Impacto: Industria, seguridad.</p>
-                    <p>Acción: ¡Explora tus datos!</p>
+                    <p>Impacto: Industria, seguridad, salud, logística.</p>
+                    <p>Acción: ¡Explora tus datos y aplica la exponencial en tu vida diaria!</p>
+                    <p>¿Qué otras aplicaciones se te ocurren?</p>
                 </div>
                 <button class="action-btn" onclick="showModal('summaryModal')">Ver Resumen</button>
             </section>
