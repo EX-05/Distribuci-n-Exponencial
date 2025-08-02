@@ -1,24 +1,15 @@
-/* Estilo general */
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #080812, #121a2f); /* Darker gradient: near-black navy to dark blue-gray */
+    background: linear-gradient(135deg, #080812, #121a2f);
     overflow: hidden;
-    font-size: 1.1em; /* Maintained for 90% zoom */
+    margin: 0;
+    padding: 0;
 }
 
-/* Fondo de partículas */
-#particles-js {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
-
-/* Animación de tiempo */
 .time-animation {
-    width: 20vw; /* Relative units */
-    height: 10vw;
-    background: linear-gradient(90deg, #00d4ff, #ff007a); /* Consistent with previous */
+    width: clamp(15vw, 200px, 20vw);
+    height: clamp(8vw, 100px, 10vw);
+    background: linear-gradient(90deg, #00d4ff, #ff007a);
     border-radius: 8px;
     animation: pulse 1.5s infinite;
 }
@@ -29,70 +20,95 @@ body {
     100% { transform: scale(1); }
 }
 
-/* Títulos */
 .reveal h1, .reveal h2 {
     font-family: 'Orbitron', sans-serif;
-    color: #00e6ff; /* Bright cyan for contrast */
+    color: #00e6ff;
     text-shadow: 0 0 8px rgba(0, 230, 255, 0.6), 0 0 4px rgba(0, 230, 255, 0.4);
-    font-size: 1.5em; /* Maintained for zoom */
+    font-size: clamp(1.2em, 4vw, 2em);
+    margin: 0.5em 0;
 }
 
-/* Texto */
 .reveal p, .reveal li {
-    color: #f5f5fa; /* Slightly brighter white-gray for readability */
-    font-size: 1em; /* Maintained for zoom */
+    color: #f5f5fa;
+    font-size: clamp(0.7em, 2vw, 1em);
     text-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
+    margin: 0.3em 0;
 }
 
-/* Fórmulas KaTeX */
-.katex {
-    font-family: 'Fira Code', monospace;
-    font-size: 1.1em; /* Maintained for zoom */
-    color: #00ffaa; /* Bright green for visibility */
-    text-shadow: 0 0 4px rgba(0, 255, 170, 0.5);
+.katex-formula {
+    font-size: clamp(1em, 2vw, 1.3em) !important;
+    color: #00ffaa;
+    text-shadow: 0 0 2px rgba(0, 255, 170, 0.4);
+    margin: 0.2em 0;
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+    line-height: 1.1;
 }
 
-/* Animación de fórmulas */
-.katex-animate {
-    opacity: 0;
-    animation: writeFormula 0.8s forwards;
+.formula-text {
+    font-size: clamp(0.6em, 1.8vw, 0.9em);
+    color: #e0e0e0;
+    margin: 0.2em 0;
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
 }
 
-@keyframes writeFormula {
-    0% { opacity: 0; transform: translateY(15px) scale(0.95); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
+.formula-container {
+    margin: 0.7em 0;
+    padding: 0.3em 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+    max-width: 100%;
+    overflow-x: auto;
 }
 
-/* Gráficos */
-.reveal canvas {
-    border: 1px solid #00e6ff; /* Bright cyan border */
+.reveal canvas,
+.modal-content canvas {
+    width: 100% !important;
+    max-width: 540px !important;
+    aspect-ratio: 16/5 !important; /* Rectángulo horizontal */
+    min-height: 120px !important;
+    height: auto !important;
+    margin: 1em auto !important;
+    display: block;
+    font-size: 1em !important;
+}
+
+.chartjs-size-monitor, .chartjs-render-monitor {
+    font-size: 1.2em !important;
+}
+
+.chartjs-tooltip {
+    font-size: 1.1em !important;
+}
+
+.reveal video {
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 230, 255, 0.4), inset 0 0 3px rgba(0, 230, 255, 0.2);
-    max-width: 90%; /* Responsive width */
+    max-width: 100%;
+    width: clamp(280px, 80vw, 560px);
     height: auto;
+    box-shadow: 0 0 10px rgba(0, 230, 255, 0.4);
+    margin: 0 auto;
+    display: block;
 }
 
-/* Botones y sliders */
-.reveal button, .reveal input[type="range"] {
-    background: linear-gradient(45deg, #00e6ff, #ff007a); /* Consistent with previous */
-    color: #080812; /* Matching darker background for button text */
-    padding: 8px 14px; /* Slightly larger */
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-family: 'Orbitron', sans-serif;
-    transition: all 0.2s ease;
-    box-shadow: 0 0 5px rgba(0, 230, 255, 0.3);
-    font-size: 0.9em; /* Maintained for zoom */
+.responsive-video {
+    width: 100% !important;
+    height: auto !important;
 }
 
-/* Imágenes */
-.reveal img {
+.reveal img, .responsive-image {
     border-radius: 8px;
-    max-width: 20vw; /* Relative units */
-    max-height: 20vh;
+    max-width: 100%;
+    width: clamp(100px, 20vw, 200px);
+    max-height: clamp(80px, 15vh, 120px);
     box-shadow: 0 0 10px rgba(255, 0, 122, 0.4), inset 0 0 3px rgba(255, 0, 122, 0.2);
     animation: float 1.5s infinite;
+    margin: 0 auto;
+    display: block;
 }
 
 @keyframes float {
@@ -101,42 +117,134 @@ body {
     100% { transform: translateY(0); }
 }
 
-/* Explicación del slider */
-#lambdaExplanation {
-    font-size: 0.9em; /* Maintained for zoom */
-    color: #00ffaa; /* Bright green for visibility */
-    margin-top: 8px;
-    animation: fadeInGlow 0.4s;
-    text-shadow: 0 0 4px rgba(0, 255, 170, 0.5);
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 10, 26, 0.98);
+    z-index: 1000;
+    overflow: auto;
+    padding: clamp(5px, 2vw, 10px);
 }
 
-@keyframes fadeInGlow {
-    0% { opacity: 0; text-shadow: 0 0 0px rgba(0, 255, 170, 0); }
-    100% { opacity: 1; text-shadow: 0 0 4px rgba(0, 255, 170, 0.5); }
+.modal-content {
+    max-width: 600px;
+    margin: 2em auto;
+    padding: 1em 0.5em;
+    border-radius: 12px;
+    background: #23233a; /* Gris oscuro, más compacto */
+    box-shadow: 0 2px 16px #000a;
 }
 
-/* Simulación 3D */
-#mm1Sim {
-    width: 20vw; /* Relative units */
-    height: 10vw;
-    border: 1px solid #ff007a; /* Matching button gradient */
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(255, 0, 122, 0.4);
+.close {
+    color: #ffd700;
+    font-size: clamp(1em, 3vw, 1.5em);
+    cursor: pointer;
+    position: absolute;
+    top: clamp(10px, 2vw, 15px);
+    right: clamp(15px, 3vw, 20px);
+    transition: color 0.3s;
 }
 
-/* Media query for smaller screens or zoomed views */
+.close:hover {
+    color: #00e6ff;
+    transform: rotate(180deg);
+}
+
+.slider-container {
+    margin: clamp(10px, 2vw, 20px) 0;
+    width: 100%;
+    text-align: center;
+}
+
+select, input[type="range"] {
+    margin: 0.5em;
+    padding: clamp(0.3em, 1vw, 0.6em);
+    font-size: clamp(0.6em, 1.8vw, 0.8em);
+    background: #151535;
+    color: #e0e0e0;
+    border: 2px solid #ffd700;
+    border-radius: 6px;
+    width: clamp(150px, 50%, 300px);
+}
+
+table {
+    border-collapse: collapse;
+    margin: clamp(10px, 2vw, 20px) auto;
+    width: 90%;
+    max-width: 100%;
+    font-size: clamp(0.6em, 1.8vw, 0.8em);
+    overflow-x: auto;
+}
+
+th, td {
+    border: 1px solid #ffd700;
+    padding: clamp(0.3em, 1vw, 0.6em);
+    text-align: center;
+}
+
+th {
+    background: #1a4060;
+}
+
+.content-box {
+    padding: clamp(10px, 2vw, 20px);
+    text-align: center;
+}
+
+.team-info {
+    font-size: clamp(0.7em, 2vw, 1em);
+    margin: 0.5em 0;
+}
+
+.impact-text {
+    font-size: clamp(0.8em, 2.5vw, 1.2em);
+    color: #00ffaa;
+}
+
+.list-responsive {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.list-responsive li {
+    margin: 0.5em 0;
+}
+
+.reveal .slides section {
+    padding: clamp(8px, 2vw, 18px) clamp(4px, 2vw, 18px);
+    min-height: 30vh;
+    max-width: 600px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
 @media screen and (max-width: 768px) {
-    .reveal h1, .reveal h2 {
-        font-size: 1.3em;
-    }
-    .reveal p, .reveal li {
-        font-size: 0.9em;
-    }
-    .reveal canvas, #mm1Sim {
-        max-width: 100%;
-    }
-    .reveal img {
-        max-width: 30vw;
-        max-height: 15vh;
-    }
+    .reveal h1, .reveal h2 { font-size: clamp(1em, 3.5vw, 1.5em); }
+    .reveal p, .reveal li { font-size: clamp(0.6em, 2vw, 0.9em); }
+    .reveal canvas { max-width: 95%; height: 35vh !important; }
+    .reveal video { max-width: 95%; }
+    .modal-content { font-size: clamp(0.6em, 2vw, 0.8em); }
+    .katex-formula { font-size: clamp(0.9em, 2.5vw, 1.3em); }
+    .formula-text { font-size: clamp(0.5em, 1.5vw, 0.7em); }
+}
+
+@media screen and (max-width: 480px) {
+    .reveal h1, .reveal h2 { font-size: clamp(0.8em, 3vw, 1.2em); }
+    .reveal p, .reveal li { font-size: clamp(0.5em, 1.8vw, 0.7em); }
+    .reveal canvas { max-width: 100%; height: 30vh !important; }
+    .reveal video { max-width: 100%; }
+    .modal-content { font-size: clamp(0.5em, 1.5vw, 0.6em); }
+    .katex-formula { font-size: clamp(0.7em, 2vw, 1em); }
+    .formula-text { font-size: clamp(0.4em, 1.2vw, 0.6em); }
+}
+
+@media (max-width: 900px) {
+    .reveal .slides section { padding: 6vw 2vw; min-height: 50vh; }
+    .container { flex-direction: column; gap: 16px; }
+    .item { width: 98vw; max-width: 98vw; }
 }

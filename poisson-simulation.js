@@ -2,7 +2,7 @@ const poissonCanvas = document.createElement('canvas');
 poissonCanvas.id = 'poissonSim';
 poissonCanvas.width = 150;
 poissonCanvas.height = 100;
-poissonCanvas.style.cssText = 'position: absolute; top: 120px; left: 10px; z-index: 100; border: 1px solid #00ff9f; border-radius: 8px;';
+poissonCanvas.style.cssText = 'position: absolute; top: 120px; left: 10px; z-index: 100; border: 1px solid #00ff9f; border-radius: 8px; background: rgba(0, 0, 0, 0.5);';
 document.body.appendChild(poissonCanvas);
 const ctx = poissonCanvas.getContext('2d');
 let events = [];

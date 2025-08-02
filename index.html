@@ -1,300 +1,265 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avance #1: Distribución Exponencial</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/night.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
-    <script src="animations1.js"></script>
-    <script src="mm1-simulation.js"></script>
-    <script src="poisson-simulation.js"></script>
-    <script src="scripts.js"></script>
-    <style>
-        html, body { height: 100%; width: 100%; margin: 0; padding: 0; overflow: hidden; background: linear-gradient(135deg, #080812, #121a2f); }
-        #particles-js { position: absolute; width: 100%; height: 100%; z-index: -1; }
-        .reveal { width: 100% !important; height: 100% !important; }
-        .reveal .slides { width: 100% !important; height: 100% !important; display: flex; justify-content: center; align-items: center; }
-        .reveal section { text-align: center; padding: 10px; }
-        .reveal h1 { font-family: 'Orbitron', sans-serif; font-size: 1.5em; color: #00e6ff; font-weight: 800; text-shadow: 0 0 5px rgba(0, 230, 255, 0.6); }
-        .reveal h2 { font-family: 'Orbitron', sans-serif; font-size: 1.2em; color: #ffd700; font-weight: 700; }
-        .reveal p, .reveal li { font-family: 'Poppins', sans-serif; font-size: 0.9em; color: #f5f5fa; line-height: 1.3; text-shadow: 0 0 2px rgba(255, 255, 255, 0.2); }
-        .reveal ul { padding-left: 20px; text-align: left; display: inline-block; }
-        .reveal button { background: linear-gradient(45deg, #00e6ff, #ff007a); color: #080812; padding: 6px 10px; border: none; border-radius: 5px; cursor: pointer; font-family: 'Orbitron', sans-serif; transition: all 0.2s ease; box-shadow: 0 0 4px rgba(0, 230, 255, 0.3); margin: 5px; font-size: 0.8em; }
-        .reveal button:hover { transform: scale(1.05); box-shadow: 0 0 10px #00e6ff; }
-        .reveal canvas { max-width: 60%; height: auto; display: block; margin: 10px auto; border: 1px solid #00e6ff; border-radius: 6px; box-shadow: 0 0 8px rgba(0, 230, 255, 0.4); }
-        .modal { display: none; position: fixed; top: 10%; left: 10%; width: 80%; height: 80%; background: rgba(10, 10, 26, 0.98); z-index: 1000; overflow: auto; }
-        .modal-content { margin: 10px auto; padding: 10px; width: 90%; height: 90%; border-radius: 10px; background: rgba(15, 15, 35, 0.98); color: #e0e0e0; display: flex; flex-direction: column; align-items: center; font-size: 0.9em; }
-        .close { color: #ffd700; font-size: 1.2em; cursor: pointer; position: absolute; top: 10px; right: 15px; transition: color 0.3s; }
-        .close:hover { color: #00e6ff; transform: rotate(180deg); }
-        .slider-container { margin: 10px 0; }
-        .slider-info { font-size: 0.8em; color: #00ffaa; margin: 5px 0; text-shadow: 0 0 3px rgba(0, 255, 170, 0.5); }
-        select, input[type="range"] { margin: 5px; padding: 6px; font-size: 0.8em; background: #151535; color: #e0e0e0; border: 2px solid #ffd700; border-radius: 6px; }
-        table { border-collapse: collapse; margin: 10px auto; width: 90%; font-size: 0.8em; }
-        th, td { border: 1px solid #ffd700; padding: 5px; text-align: center; color: #e0e0e0; }
-        th { background: #1a4060; }
-        @media screen and (max-width: 768px) { .reveal h1 { font-size: 1.2em; } .reveal h2 { font-size: 1em; } .reveal p, .reveal li { font-size: 0.7em; } .reveal canvas { max-width: 90%; } .modal { top: 5%; left: 5%; width: 90%; height: 90%; } .modal-content { font-size: 0.7em; } }
-        @media screen and (max-width: 480px) { .reveal h1 { font-size: 1em; } .reveal h2 { font-size: 0.9em; } .reveal p, .reveal li { font-size: 0.6em; } .reveal canvas { max-width: 95%; } .modal-content { font-size: 0.6em; } }
-    </style>
+    <title>Avance #1: El Poder de Predecir lo Impredecible</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/black.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Orbitron:wght@400;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body, { delimiters: [{left: '$', right: '$', display: true}, {left: '$', right: '$', display: false}] });"></script>
+    <script src="scripts.js" defer></script>
+    <script src="mm1-simulation.js" defer></script>
+    <script src="poisson-simulation.js" defer></script>
+    <script src="animations1.js" defer></script>
 </head>
 <body>
-    <div id="particles-js"></div>
     <div class="reveal">
         <div class="slides">
-            <section>
-                <h1>Avance #1: El Poder de Predecir lo Impredecible</h1>
-                <p>Equipo #6: Retana Elian, Coto Eduardo, Rivera Daniel, Madrigal Jorge</p>
-                <p>Asignatura: Probabilidad y Estadística, Lunes 2-5 pm</p>
-                <p>Profesor: Herny Francisco Barrantes</p>
-                <p>Gancho: “¿Cuánto tiempo hasta la próxima notificación? ¡La exponencial lo descubre!”</p>
-                <button onclick="showModal('motivationChartModal')">Ver Curva</button>
+            <!-- Portada -->
+            <section data-transition="cube">
+                <h1>El Poder de Predecir lo Impredecible</h1>
+                <div class="team-info">
+                    <p>Equipo #6: Retana Elian, Coto Eduardo, Rivera Daniel, Madrigal Jorge</p>
+                    <p>Probabilidad y Estadística &mdash; Prof. Herny Barrantes</p>
+                </div>
+                <h2 class="gancho">¿Cuánto tiempo hasta la próxima notificación?<br><span style="color:#ffd700;">¡La exponencial lo descubre!</span></h2>
+                <button class="action-btn" onclick="showModal('motivationModal')">Ver Curva</button>
             </section>
-            <section>
-                <h2>¿Por Qué Nos Apasiona? (Presentador 1)</h2>
-                <p>Predice tiempos hasta eventos aleatorios.</p>
-                <p><strong>Relevancia:</strong> Fallos de máquinas, llegadas de clientes.</p>
-                <p><strong>Ejemplo:</strong> Tiempo hasta el próximo pasajero.</p>
-                <p><strong>Dato:</strong> 65% de modelos de fiabilidad (Walpole, 2017).</p>
-            </section>
-            <section>
-                <h2>Mapa de la Aventura (Presentador 1)</h2>
-                <ul>
-                    <li>Metas: ¿Qué descubrimos?</li>
-                    <li>Estrategia: ¿Cómo exploramos?</li>
-                    <li>Teoría: ¿Qué la hace única?</li>
-                    <li>Impacto: ¿Dónde transforma?</li>
-                    <li>Datos: Visualización en Excel.</li>
-                    <li>Cierre: Resumen y fuentes.</li>
+            <!-- Motivación -->
+            <section data-transition="cube">
+                <h2>¿Por Qué Nos Apasiona?</h2>
+                <ul class="list-responsive">
+                    <li>Predice tiempos hasta eventos aleatorios.</li>
+                    <li>Relevancia: Fallos de máquinas, llegadas de clientes.</li>
+                    <li>Ejemplo: Tiempo hasta el próximo pasajero.</li>
+                    <li>Dato: 65% de modelos de fiabilidad (Walpole, 2017).</li>
                 </ul>
             </section>
-            <section>
-                <h2>Misión Principal (Presentador 1)</h2>
-                <p>Analizar características y usos de la exponencial.</p>
-                <p><strong>Foco:</strong> Intervalos entre eventos (ej., fallo de dron).</p>
-                <p><strong>Importancia:</strong> Optimiza industria y tecnología.</p>
+            <!-- Mapa -->
+            <section data-transition="cube">
+                <h2>Mapa de la Aventura</h2>
+                <table class="responsive-table">
+                    <tr><td>Metas: ¿Qué descubrimos?</td></tr>
+                    <tr><td>Estrategia: ¿Cómo exploramos?</td></tr>
+                    <tr><td>Teoría: ¿Qué la hace única?</td></tr>
+                    <tr><td>Impacto: ¿Dónde transforma?</td></tr>
+                    <tr><td>Datos: Visualización en Excel.</td></tr>
+                    <tr><td>Cierre: Resumen y fuentes.</td></tr>
+                </table>
             </section>
-            <section>
-                <h2>Metas - Base (Presentador 1)</h2>
-                <p>Propiedades: sin memoria, riesgo constante.</p>
-                <p>Rol en eventos aleatorios (ej., pedidos en restaurante).</p>
-                <p><strong>Ejemplo:</strong> Esperar >12 min con λ = 1/8.</p>
-            </section>
-            <section>
-                <h2>Metas - Práctica (Presentador 1)</h2>
-                <p>Simular con λ = 0.1, 0.3, 0.8 en Excel.</p>
-                <p>Gráficos de patrones.</p>
-                <p>Analizar cambios por λ.</p>
-                <p><strong>Ejemplo:</strong> Fallos raros vs. frecuentes.</p>
-                <button onclick="showModal('simulationChartModal')">Simular</button>
-            </section>
-            <section>
-                <h2>Estrategia (Presentador 1)</h2>
-                <p><strong>Dual:</strong> Numérico y narrativo.</p>
-                <p><strong>Numérico:</strong> Datos en Excel.</p>
-                <p><strong>Narrativo:</strong> Teoría práctica.</p>
-                <p><strong>Ventaja:</strong> Aprendizaje profundo.</p>
-            </section>
-            <section>
-                <h2>Naturaleza (Presentador 2)</h2>
-                <p><strong>Numérica:</strong> Simular intervalos (ej., café).</p>
-                <p><strong>Narrativa:</strong> Explicar propiedades.</p>
-                <p><strong>Ejemplo:</strong> Clientes cada 7 min (λ = 1/7).</p>
-            </section>
-            <section>
-                <h2>Universo y Datos (Presentador 2)</h2>
-                <p><strong>Universo:</strong> Eventos aleatorios (fallos, taxis).</p>
-                <p><strong>Datos:</strong> Simulados con λ = 0.1, 0.5, 1.</p>
-                <p><strong>Beneficio:</strong> Patrones sin datos reales.</p>
-            </section>
-            <section>
-                <h2>Herramientas (Presentador 2)</h2>
-                <p><strong>Principal:</strong> Excel para gráficos.</p>
-                <p><strong>Secundarias:</strong> Libros (Ross, Hogg).</p>
-                <p><strong>Ventaja:</strong> Visualización clara.</p>
-            </section>
-            <section>
-                <h2>Procesar Datos (Presentador 2)</h2>
-                <ul>
-                    <li><strong>Proceso:</strong> =-(1/λ)*LN(ALEATORIO()).</li>
-                    <li>Tablas de análisis.</li>
-                    <li>Gráficos (histogramas).</li>
-                    <li>Conexión teoría-práctica.</li>
+            <!-- Metas -->
+            <section data-transition="cube">
+                <h2>Metas y Aplicaciones</h2>
+                <ul class="list-responsive">
+                    <li>Propiedades: sin memoria, riesgo constante.</li>
+                    <li>Rol en eventos aleatorios (ej., pedidos en restaurante).</li>
+                    <li>Ejemplo: Esperar &gt;12 min con media 8 min.</li>
                 </ul>
+                <button class="action-btn" onclick="showModal('simulationModal')">Simular</button>
             </section>
-            <section>
-                <h2>Visualizar (Presentador 2)</h2>
-                <p><strong>Histogramas:</strong> Frecuencia de tiempos.</p>
-                <p><strong>Curvas:</strong> f(x) = λe^(-λx).</p>
-                <p><strong>Ejemplo:</strong> λ = 0.2 vs. λ = 1.</p>
-                <button onclick="showModal('patternChartModal')">Ver Gráfico</button>
+            <!-- Teoría y Fórmulas -->
+            <section data-transition="cube">
+                <h2>Fórmulas Clave</h2>
+                <div class="formula-container">
+                    <span class="katex-formula" data-formula="f(x) = \lambda e^{-\lambda x}, \quad x \geq 0"></span>
+                    <p class="formula-text">Función de densidad de probabilidad.</p>
+                </div>
+                <div class="formula-container">
+                    <span class="katex-formula" data-formula="P(T > t) = e^{-\lambda t}, \quad t \geq 0"></span>
+                    <p class="formula-text">Probabilidad de esperar más de <b>t</b>.</p>
+                </div>
+                <div class="formula-container">
+                    <span class="katex-formula" data-formula="P(T > t + s \mid T > t) = P(T > s), \quad s, t \geq 0"></span>
+                    <p class="formula-text">Propiedad de memoria nula.</p>
+                </div>
+                <div class="formula-container">
+                    <span class="katex-formula" data-formula="P(N(t) = n) = \frac{(\lambda t)^n e^{-\lambda t}}{n!}, \quad n = 0, 1, 2, \ldots"></span>
+                    <p class="formula-text">Distribución de Poisson relacionada.</p>
+                </div>
             </section>
-            <section>
-                <h2>Teoría - ¿Qué Es? (Presentador 2)</h2>
-                <p><strong>Exponencial:</strong> Tiempo hasta evento.</p>
-                <p><strong>λ:</strong> Tasa (ej., 0.4 eventos/hora).</p>
-                <p><strong>Ejemplo:</strong> Falla de robot (λ = 1/1000).</p>
+            <!-- Visualización -->
+            <section data-transition="cube">
+                <h2>Visualiza la Exponencial</h2>
+                <div class="content-box">
+                    <p>Histogramas y curvas para diferentes tasas.</p>
+                    <p>¡Interactúa con los sliders y observa los cambios!</p>
+                </div>
+                <button class="action-btn" onclick="showModal('excelChartModal')">Ver Gráfico</button>
             </section>
-            <section>
-                <h2>Memoria Corta (Presentador 3)</h2>
-                <p><strong>Sin memoria:</strong> Futuro independiente.</p>
-                <p><strong>Ejemplo:</strong> Ventilador usado = nuevo.</p>
-                <p><strong>Relevancia:</strong> Predicciones simples.</p>
+            <!-- Patrones -->
+            <section data-transition="cube">
+                <h2>Patrones Visuales</h2>
+                <div class="content-box">
+                    <p>Resultados: Distribución sesgada.</p>
+                    <p>Curvas: Tasa alta = más empinadas.</p>
+                    <p>Comparación: Tasa baja vs. alta.</p>
+                </div>
+                <button class="action-btn" onclick="showModal('patternModal')">Comparar Tasas</button>
             </section>
-            <section>
-                <h2>Matemática (Presentador 3)</h2>
-                <p><strong>Fórmula:</strong> P(T > t+s | T > t) = P(T > s).</p>
-                <p><strong>Significado:</strong> Probabilidad constante.</p>
-                <p><strong>Ejemplo:</strong> Servidor tras 20 días.</p>
+            <!-- Videos -->
+            <section data-transition="cube">
+                <h2>Videos Explicativos</h2>
+                <div class="container">
+                    <div class="item">
+                        <video controls class="responsive-video">
+                            <source src="Introduccion.mp4" type="video/mp4">
+                            Tu navegador no soporta el video.
+                        </video>
+                        <h3>Introducción y Ejemplos</h3>
+                    </div>
+                    <div class="item">
+                        <video controls class="responsive-video">
+                            <source src="Simulacion.mp4" type="video/mp4">
+                            Tu navegador no soporta el video.
+                        </video>
+                        <h3>Simulación</h3>
+                    </div>
+                    <div class="item">
+                        <video controls class="responsive-video">
+                            <source src="Distribuciongeneral.mp4" type="video/mp4">
+                            Tu navegador no soporta el video.
+                        </video>
+                        <h3>Distribución General</h3>
+                    </div>
+                </div>
             </section>
-            <section>
-                <h2>Riesgo Constante (Presentador 3)</h2>
-                <p><strong>Tasa fija:</strong> Probabilidad constante.</p>
-                <p><strong>Diferencia:</strong> Sin desgaste.</p>
-                <p><strong>Ejemplo:</strong> Sensor IoT.</p>
+            <!-- Libros -->
+            <section data-transition="cube">
+                <h2>Libros Recomendados</h2>
+                <div class="container">
+                    <div class="item">
+                        <img src="assets/images/libro_1.jpg" alt="Devore (2016)">
+                        <h3>Devore (2016)</h3>
+                    </div>
+                    <div class="item">
+                        <img src="assets/images/libro_2.jpg" alt="Hogg et al. (2015)">
+                        <h3>Hogg et al. (2015)</h3>
+                    </div>
+                    <div class="item">
+                        <img src="assets/images/libro_3.jpg" alt="Ross (2019)">
+                        <h3>Ross (2019)</h3>
+                    </div>
+                    <div class="item">
+                        <img src="assets/images/libro_4.jpg" alt="Walpole et al. (2017)">
+                        <h3>Walpole et al. (2017)</h3>
+                    </div>
+                </div>
             </section>
-            <section>
-                <h2>Conexión Poisson (Presentador 3)</h2>
-                <p><strong>Poisson:</strong> Eventos por intervalo.</p>
-                <p><strong>Exponencial:</strong> Tiempos entre eventos.</p>
-                <p><strong>Relación:</strong> λ conecta ambos.</p>
+            <!-- Cierre -->
+            <section data-transition="cube">
+                <h2>Cierre</h2>
+                <div class="content-box">
+                    <p>Predice eventos aleatorios.</p>
+                    <p>Propiedades: Sin memoria, riesgo constante.</p>
+                    <p>Impacto: Industria, seguridad.</p>
+                    <p>Acción: ¡Explora tus datos!</p>
+                </div>
+                <button class="action-btn" onclick="showModal('summaryModal')">Ver Resumen</button>
             </section>
-            <section>
-                <h2>Mundo Real (Presentador 3)</h2>
-                <ul>
-                    <li><strong>Aplicaciones:</strong> Fiabilidad, proyectos.</li>
-                    <li>Seguridad digital.</li>
-                </ul>
-                <p><strong>Impacto:</strong> Reduce costos.</p>
-            </section>
-            <section>
-                <h2>Fiabilidad (Presentador 3)</h2>
-                <p>Tiempos entre fallos.</p>
-                <p><strong>Ejemplo:</strong> Turbina (λ = 1/4000), P(T > 5000) ≈ 0.287.</p>
-                <p><strong>Beneficio:</strong> Mantenimiento.</p>
-            </section>
-            <section>
-                <h2>Proyectos (Presentador 4)</h2>
-                <p>Intervalos de retrasos.</p>
-                <p><strong>Ejemplo:</strong> Retrasos (λ = 1/25), P(T > 30) ≈ 0.301.</p>
-                <p><strong>Beneficio:</strong> Optimización.</p>
-            </section>
-            <section>
-                <h2>Seguridad (Presentador 4)</h2>
-                <p>Tiempos entre ataques.</p>
-                <p><strong>Ejemplo:</strong> Servidor (λ = 1/10), P(T > 15) ≈ 0.223.</p>
-                <p><strong>Beneficio:</strong> Estrategias.</p>
-            </section>
-            <section>
-                <h2>Caso Práctico (Presentador 4)</h2>
-                <p><strong>Escenario:</strong> Pedidos (λ = 0.2).</p>
-                <p><strong>Pregunta:</strong> P(T > 8) ≈ 0.202.</p>
-                <p><strong>Relevancia:</strong> Planificación.</p>
-            </section>
-            <section>
-                <h2>Simulación Excel (Presentador 4)</h2>
-                <p><strong>Método:</strong> =-(1/λ)*LN(ALEATORIO()).</p>
-                <p>Histogramas y curvas.</p>
-                <p><strong>Ejemplo:</strong> λ = 0.1, 0.5.</p>
-                <button onclick="showModal('excelChartModal')">Simular</button>
-            </section>
-            <section>
-                <h2>Patrones (Presentador 4)</h2>
-                <p><strong>Resultados:</strong> Distribución sesgada.</p>
-                <p><strong>Curvas:</strong> λ grande = empinadas.</p>
-                <p><strong>Comparación:</strong> λ = 0.1 vs. 1.</p>
-            </section>
-            <section>
-                <h2>Cierre (Todos)</h2>
-                <p>Predice eventos aleatorios.</p>
-                <p><strong>Propiedades:</strong> Sin memoria, riesgo constante.</p>
-                <p><strong>Impacto:</strong> Industria, seguridad.</p>
-                <p><strong>Acción:</strong> ¡Explora tus datos!</p>
-                <button onclick="showModal('summaryChartModal')">Ver Resumen</button>
-            </section>
-            <section>
-                <h2>Fuentes (Todos)</h2>
-                <ul>
+            <!-- Fuentes -->
+            <section data-transition="cube">
+                <h2>Fuentes</h2>
+                <ul class="list-responsive">
                     <li>Devore (2016).</li>
                     <li>Hogg et al. (2015).</li>
                     <li>Ross (2019).</li>
                     <li>Walpole et al. (2017).</li>
                 </ul>
             </section>
+            <!-- Kahoot -->
+            <section data-transition="cube">
+                <h2>¡Cierre Épico con Kahoot!</h2>
+                <div class="content-box">
+                    <p>Gracias, equipo #6 te rata con un Kahoot imposible.</p>
+                    <p>¡Pincha el botón para unirte con el enlace!</p>
+                </div>
+                <button class="action-btn" onclick="window.open('https://kahoot.it', '_blank')">¡Juga el Kahoot Ahora!</button>
+            </section>
         </div>
     </div>
 
-    <div id="motivationChartModal" class="modal">
+    <!-- Modals -->
+    <div id="motivationModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal('motivationChartModal')">&times;</span>
-            <h3>Curva Exponencial</h3>
-            <canvas id="motivationChart"></canvas>
+            <span class="close" onclick="closeModal('motivationModal')">×</span>
+            <h2>Curva Exponencial</h2>
+            <canvas id="motivationChart" style="width: 100%; height: 40vh; min-height: 200px; aspect-ratio: 16/9;"></canvas>
+            <div class="slider-container">
+                <p>Ajusta tasa: <input type="range" id="motivationSlider" min="0.1" max="1" step="0.1" value="0.5" oninput="updateMotivationChart()"></p>
+                <p>Tasa = <span id="motivationLambda">0.5</span></p>
+            </div>
         </div>
     </div>
-    <div id="simulationChartModal" class="modal">
+
+    <div id="simulationModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal('simulationChartModal')">&times;</span>
-            <h3>Simulación Excel</h3>
-            <p>Fórmula: =-(1/λ)*LN(ALEATORIO())</p>
-            <table>
+            <span class="close" onclick="closeModal('simulationModal')">×</span>
+            <h2>Simulación Excel</h2>
+            <p>Método: Generar tiempos aleatorios</p>
+            <table class="responsive-table">
                 <tr><th>Tiempo</th><th>Frecuencia</th></tr>
-                <tr><td id="simTime1">0.5</td><td id="simFreq1">0.1</td></tr>
-                <tr><td id="simTime2">1.2</td><td id="simFreq2">0.2</td></tr>
+                <tr><td id="simTime1">0</td><td id="simFreq1">0</td></tr>
+                <tr><td id="simTime2">0</td><td id="simFreq2">0</td></tr>
             </table>
-            <canvas id="simulationChart"></canvas>
+            <canvas id="simulationChart" style="width: 100%; height: 40vh; min-height: 200px; aspect-ratio: 16/9;"></canvas>
             <div class="slider-container">
-                <p>Ajusta λ: <input type="range" id="simulationSlider" min="0.1" max="1" step="0.1" value="0.5" oninput="updateSimulationChart()"></p>
-                <p class="slider-info">λ = <span id="simulationLambda">0.5</span></p>
-                <button onclick="regenerateSimulation()">Regenerar</button>
+                <p>Ajusta tasa: <input type="range" id="simulationSlider" min="0.1" max="1" step="0.1" value="0.5" oninput="updateSimulationChart()"></p>
+                <p>Tasa = <span id="simulationLambda">0.5</span></p>
+                <button class="action-btn" onclick="regenerateSimulation()">Regenerar</button>
             </div>
         </div>
     </div>
-    <div id="patternChartModal" class="modal">
+
+    <div id="patternModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal('patternChartModal')">&times;</span>
-            <h3>Patrones Visuales</h3>
-            <canvas id="patternChart"></canvas>
+            <span class="close" onclick="closeModal('patternModal')">×</span>
+            <h2>Patrones Visuales</h2>
+            <canvas id="patternChart" style="width: 100%; height: 40vh; min-height: 200px; aspect-ratio: 16/9;"></canvas>
             <div class="slider-container">
-                <p>Selecciona λ: <select id="patternSlider" onchange="updatePatternChart()">
-                    <option value="0.1">0.1</option>
-                    <option value="0.3">0.3</option>
-                    <option value="0.8">0.8</option>
-                    <option value="1">1</option>
-                </select></p>
-                <button onclick="regeneratePattern()">Regenerar</button>
+                <p>Selecciona tasa: 
+                    <select id="patternSlider" onchange="updatePatternChart()">
+                        <option value="0.1">0.1</option>
+                        <option value="0.3">0.3</option>
+                        <option value="0.8">0.8</option>
+                        <option value="1">1</option>
+                    </select>
+                </p>
+                <button class="action-btn" onclick="regeneratePattern()">Regenerar</button>
             </div>
         </div>
     </div>
+
     <div id="excelChartModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal('excelChartModal')">&times;</span>
-            <h3>Simulación Excel</h3>
-            <p>Fórmula: =-(1/λ)*LN(ALEATORIO())</p>
-            <table>
+            <span class="close" onclick="closeModal('excelChartModal')">×</span>
+            <h2>Simulación Excel</h2>
+            <p>Método: Generar tiempos aleatorios</p>
+            <table class="responsive-table">
                 <tr><th>Tiempo</th><th>Frecuencia</th></tr>
-                <tr><td id="excelTime1">0.3</td><td id="excelFreq1">0.1</td></tr>
-                <tr><td id="excelTime2">0.9</td><td id="excelFreq2">0.2</td></tr>
+                <tr><td id="excelTime1">0</td><td id="excelFreq1">0</td></tr>
+                <tr><td id="excelTime2">0</td><td id="excelFreq2">0</td></tr>
             </table>
-            <canvas id="excelChart"></canvas>
+            <canvas id="excelChart" style="width: 100%; height: 40vh; min-height: 200px; aspect-ratio: 16/9;"></canvas>
             <div class="slider-container">
-                <p>Ajusta λ: <input type="range" id="excelSlider" min="0.1" max="1" step="0.1" value="0.1" oninput="updateExcelChart()"></p>
-                <p class="slider-info">λ = <span id="excelLambda">0.1</span></p>
-                <button onclick="regenerateExcel()">Regenerar</button>
+                <p>Ajusta tasa: <input type="range" id="excelSlider" min="0.1" max="1" step="0.1" value="0.5" oninput="updateExcelChart()"></p>
+                <p>Tasa = <span id="excelLambda">0.5</span></p>
+                <button class="action-btn" onclick="regenerateExcel()">Regenerar</button>
             </div>
         </div>
     </div>
-    <div id="summaryChartModal" class="modal">
+
+    <div id="summaryModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal('summaryChartModal')">&times;</span>
-            <h3>Resumen Exponencial</h3>
-            <canvas id="summaryChart"></canvas>
+            <span class="close" onclick="closeModal('summaryModal')">×</span>
+            <h2>Resumen Exponencial</h2>
+            <canvas id="summaryChart" style="width: 100%; height: 40vh; min-height: 200px; aspect-ratio: 16/9;"></canvas>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.min.js"></script>
 </body>
 </html>
