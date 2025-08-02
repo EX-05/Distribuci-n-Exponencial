@@ -121,6 +121,36 @@ document.addEventListener("DOMContentLoaded", function() {
         flex-direction: column;
         align-items: center;
     }
+
+
+
+    /* Estilos para la sección de fórmulas clave */
+    .formulas-compact {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5em;
+    }
+    .formula-group {
+        padding: 1em;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .formulas-scroll {
+        max-height: 60vh;
+        overflow-y: auto;
+        padding: 0 1em;
+        margin-top: 1em;
+        width: 100%;
+    }
+    .scroll-hint {
+        text-align: center;
+        margin-top: 1em;
+        font-size: 0.9em;
+        color: #666;
+    }
 </style>
 </head>
 <body>
@@ -176,34 +206,31 @@ document.addEventListener("DOMContentLoaded", function() {
                 <button class="action-btn" onclick="showModal('simulationModal')">Simular</button>
             </section>
             <!-- Teoría y Fórmulas -->
-            <section data-transition="cube">
+            <section data-transition="cube" class="formulas-fondo">
                 <h2 class="formulas-header">FÓRMULAS CLAVE</h2>
-                <div class="formulas-columns">
-                    <div class="formulas-col">
-                        <div class="formula-group">
-                            <div class="formula-title">Función de densidad de probabilidad:</div>
-                            <div class="formula-math">$$f(x) = \lambda e^{-\lambda x}$$</div>
-                            <div class="formula-lectura">La probabilidad de que el tiempo sea exactamente <b>x</b>.</div>
-                        </div>
-                        <div class="formula-group">
-                            <div class="formula-title">Probabilidad de esperar más de <i>t</i>:</div>
-                            <div class="formula-math">$$P(T > t) = e^{-\lambda t}$$</div>
-                            <div class="formula-lectura">Probabilidad de que el tiempo de espera sea mayor a <b>t</b>.</div>
-                        </div>
+                <div class="formulas-scroll">
+                    <div class="formula-group">
+                        <div class="formula-title">Función de densidad de probabilidad</div>
+                        <div class="formula-math">$$f(x) = \lambda e^{-\lambda x}$$</div>
+                        <div class="formula-lectura">Probabilidad de que el tiempo sea exactamente <b>x</b>.</div>
                     </div>
-                    <div class="formulas-col">
-                        <div class="formula-group">
-                            <div class="formula-title">Propiedad de memoria nula:</div>
-                            <div class="formula-math">$$P(T > t + s \mid T > t) = P(T > s)$$</div>
-                            <div class="formula-lectura">El pasado no afecta la probabilidad de esperar más.</div>
-                        </div>
-                        <div class="formula-group">
-                            <div class="formula-title">Distribución de Poisson relacionada:</div>
-                            <div class="formula-math">$$P(N(t) = n) = \frac{(\lambda t)^n e^{-\lambda t}}{n!}$$</div>
-                            <div class="formula-lectura">Probabilidad de que ocurran <b>n</b> eventos en el tiempo <b>t</b>.</div>
-                        </div>
+                    <div class="formula-group">
+                        <div class="formula-title">Probabilidad de esperar más de <i>t</i></div>
+                        <div class="formula-math">$$P(T > t) = e^{-\lambda t}$$</div>
+                        <div class="formula-lectura">Probabilidad de que el tiempo de espera sea mayor a <b>t</b>.</div>
+                    </div>
+                    <div class="formula-group">
+                        <div class="formula-title">Propiedad de memoria nula</div>
+                        <div class="formula-math">$$P(T > t + s \mid T > t) = P(T > s)$$</div>
+                        <div class="formula-lectura">El pasado no afecta la probabilidad de esperar más.</div>
+                    </div>
+                    <div class="formula-group">
+                        <div class="formula-title">Distribución de Poisson relacionada</div>
+                        <div class="formula-math">$$P(N(t) = n) = \frac{(\lambda t)^n e^{-\lambda t}}{n!}$$</div>
+                        <div class="formula-lectura">Probabilidad de que ocurran <b>n</b> eventos en el tiempo <b>t</b>.</div>
                     </div>
                 </div>
+                <div class="scroll-hint">Desliza hacia abajo para ver más fórmulas</div>
             </section>
             <!-- Visualización -->
             <section data-transition="cube">
