@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Fórmulas Exponencial y Poisson</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: #ffffff;
+            color: #222;
+        }
+
+        .titulo {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 25px;
+            margin-bottom: 5px;
+        }
+
+        .formula {
+            font-size: 1.4em;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="titulo">Función de densidad de probabilidad:</div>
+    <div class="formula">$$f(x) = \lambda e^{-\lambda x}$$</div>
+
+    <div class="titulo">Probabilidad de esperar más de \( t \):</div>
+    <div class="formula">$$P(T > t) = e^{-\lambda t}$$</div>
+
+    <div class="titulo">Propiedad de memoria nula:</div>
+    <div class="formula">$$P(T > t + s \mid T > t) = P(T > s)$$</div>
+
+    <div class="titulo">Distribución de Poisson relacionada:</div>
+    <div class="formula">$$P(N(t) = n) = \frac{(\lambda t)^n e^{-\lambda t}}{n!}$$</div>
+
+</body>
+</html>

@@ -17,6 +17,111 @@
     <script src="mm1-simulation.js" defer></script>
     <script src="poisson-simulation.js" defer></script>
     <script src="animations1.js" defer></script>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    if (window.katex) {
+        document.querySelectorAll('.katex-formula').forEach(function(el) {
+            katex.render(el.getAttribute('data-formula'), el, {
+                throwOnError: false,
+                displayMode: true
+            });
+        });
+    }
+});
+</script>
+<!-- MathJax y estilos para fórmulas -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<style>
+    .titulo {
+        font-size: 1.1em;
+        font-weight: bold;
+        margin-top: 25px;
+        margin-bottom: 5px;
+    }
+    .formula {
+        font-size: 1.4em;
+        margin-left: 20px;
+    }
+    .formula-titulo {
+        font-size: 2vw;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 1.2em;
+        margin-bottom: 0.2em;
+        word-break: break-word;
+    }
+    .formula-math {
+        font-size: 2.2vw;
+        text-align: center;
+        margin-bottom: 0.7em;
+        word-break: break-word;
+    }
+    @media (max-width: 700px) {
+        .formula-titulo { font-size: 1.1em; }
+        .formula-math { font-size: 1.2em; }
+    }
+
+    .formulas-header {
+        text-align: center;
+        margin-bottom: 1.2em;
+        font-size: 2.5em;
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
+    .formulas-box {
+        max-width: 800px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2.2em;
+    }
+    .formula-group {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .formula-title {
+        font-size: 1.4em;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 0.2em;
+        margin-top: 0.2em;
+        word-break: break-word;
+    }
+    .formula-math {
+        font-size: 2em;
+        text-align: center;
+        margin-bottom: 0.2em;
+        word-break: break-word;
+    }
+    @media (max-width: 700px) {
+        .formulas-header { font-size: 1.3em; }
+        .formula-title { font-size: 1em; }
+        .formula-math { font-size: 1.1em; }
+        .formulas-box { max-width: 98vw; }
+    }
+
+    .formulas-columns {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2em;
+    }
+    .formulas-col {
+        flex: 1;
+        min-width: 250px;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>
 </head>
 <body>
     <div class="reveal">
@@ -72,38 +177,33 @@
             </section>
             <!-- Teoría y Fórmulas -->
             <section data-transition="cube">
-                <h2>Fórmulas Clave</h2>
-                <!-- Fórmula 1 -->
-                <section data-transition="cube">
-                    <h2>Fórmula Clave: Densidad</h2>
-                    <div class="formula-container">
-                        <span class="katex-formula" data-formula="f(x) = \lambda e^{-\lambda x}, \quad x \geq 0"></span>
-                        <p class="formula-text">La función de densidad de probabilidad describe la probabilidad de esperar exactamente un tiempo <b>x</b> antes del siguiente evento.</p>
-                        <p>Ejemplo: ¿Cuál es la probabilidad de esperar exactamente 5 minutos?</p>
+                <h2 class="formulas-header">FÓRMULAS CLAVE</h2>
+                <div class="formulas-columns">
+                    <div class="formulas-col">
+                        <div class="formula-group">
+                            <div class="formula-title">Función de densidad de probabilidad:</div>
+                            <div class="formula-math">$$f(x) = \lambda e^{-\lambda x}$$</div>
+                            <div class="formula-lectura">La probabilidad de que el tiempo sea exactamente <b>x</b>.</div>
+                        </div>
+                        <div class="formula-group">
+                            <div class="formula-title">Probabilidad de esperar más de <i>t</i>:</div>
+                            <div class="formula-math">$$P(T > t) = e^{-\lambda t}$$</div>
+                            <div class="formula-lectura">Probabilidad de que el tiempo de espera sea mayor a <b>t</b>.</div>
+                        </div>
                     </div>
-                </section>
-
-                <!-- Fórmula 2 -->
-                <section data-transition="cube">
-                    <h2>Fórmula Clave: Espera</h2>
-                    <div class="formula-container">
-                        <span class="katex-formula" data-formula="P(T > t) = e^{-\lambda t}, \quad t \geq 0"></span>
-                        <p class="formula-text">La probabilidad de esperar más de <b>t</b> minutos antes del próximo evento.</p>
-                        <p>Ejemplo: ¿Qué probabilidad hay de que el próximo cliente tarde más de 10 minutos?</p>
+                    <div class="formulas-col">
+                        <div class="formula-group">
+                            <div class="formula-title">Propiedad de memoria nula:</div>
+                            <div class="formula-math">$$P(T > t + s \mid T > t) = P(T > s)$$</div>
+                            <div class="formula-lectura">El pasado no afecta la probabilidad de esperar más.</div>
+                        </div>
+                        <div class="formula-group">
+                            <div class="formula-title">Distribución de Poisson relacionada:</div>
+                            <div class="formula-math">$$P(N(t) = n) = \frac{(\lambda t)^n e^{-\lambda t}}{n!}$$</div>
+                            <div class="formula-lectura">Probabilidad de que ocurran <b>n</b> eventos en el tiempo <b>t</b>.</div>
+                        </div>
                     </div>
-                </section>
-
-                <!-- Fórmula 3 -->
-                <section data-transition="cube">
-                    <h2>Fórmula Clave: Poisson y Memoria Nula</h2>
-                    <div class="formula-container">
-                        <span class="katex-formula" data-formula="P(T > t + s \mid T > t) = P(T > s), \quad s, t \geq 0"></span>
-                        <p class="formula-text">La propiedad de memoria nula: el futuro es independiente del pasado.</p>
-                        <span class="katex-formula" data-formula="P(N(t) = n) = \frac{(\lambda t)^n e^{-\lambda t}}{n!}, \quad n = 0, 1, 2, \ldots"></span>
-                        <p class="formula-text">La distribución de Poisson describe el número de eventos en un intervalo de tiempo.</p>
-                        <p>Ejemplo: ¿Cuántos clientes llegan en 1 hora?</p>
-                    </div>
-                </section>
+                </div>
             </section>
             <!-- Visualización -->
             <section data-transition="cube">

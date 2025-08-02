@@ -6,17 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
     Reveal.on('ready', (event) => {
         window.showModal = function(modalId) { 
             document.getElementById(modalId).style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Evita scroll de fondo
+            document.body.style.overflow = 'hidden';
             const modal = document.getElementById(modalId); 
             if (modal) { 
                 setTimeout(() => initializeChart(modalId.replace('Modal', '')), 100);
+                setTimeout(renderAllKatexFormulas, 200); // Renderiza fórmulas en modals
             } 
         };
         window.closeModal = function(modalId) { 
             const modal = document.getElementById(modalId); 
             if (modal) {
                 modal.style.display = 'none'; 
-                document.body.style.overflow = ''; // Restaura scroll
+                document.body.style.overflow = '';
             }
         };
 
@@ -132,7 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             charts[chartId] = new Chart(ctx, config[chartId]);
             charts[chartId].resize();
-            console.log(`Chart ${chartId} initialized with size ${canvas.width}x${canvas.height}`);
             if (chartId === 'simulationChart') updateSimulationChart();
             if (chartId === 'patternChart') updatePatternChart();
             if (chartId === 'excelChart') updateExcelChart();
@@ -236,34 +236,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    // RENDERIZAR KATEX SIEMPRE EN SLIDES Y MODALS
+    function renderAllKatexFormulas() {
+        document.querySelectorAll('.katex-formula').forEach(el => {
+            if (el.dataset.formula) {
+                katex.render(el.dataset.formula, el, { throwOnError: false, displayMode: true });
+            }
+        });
+    }
+    renderAllKatexFormulas();
+    if (window.Reveal) {
+        Reveal.on('slidechanged', () => {
+            renderAllKatexFormulas();
+        });
+    }
 });
-
-function renderAllKatex() {
-    document.querySelectorAll('.katex-formula').forEach(el => {
-        if (el.dataset.formula) {
-            katex.render(el.dataset.formula, el, { throwOnError: false, displayMode: true });
-        }
-    });
-}
-document.addEventListener('DOMContentLoaded', renderAllKatex);
-if (window.Reveal) Reveal.on('slidechanged', renderAllKatex);
-
-// Ejemplo para Chart.js
-const chartOptions = {
-  plugins: {
-    legend: {
-      labels: { font: { size: 16 }, color: '#00e6ff' }
-    }
-  },
-  scales: {
-    x: {
-      ticks: { font: { size: 16 }, color: '#fff' },
-      title: { display: true, text: 'Tiempo', font: { size: 18 }, color: '#00e6ff' }
-    },
-    y: {
-      ticks: { font: { size: 16 }, color: '#fff' },
-      title: { display: true, text: 'Densidad', font: { size: 18 }, color: '#00e6ff' }
-    }
-  }
-};
-// Usa chartOptions en todos tus gráficos Chart.js
